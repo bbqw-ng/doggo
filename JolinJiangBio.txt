@@ -1,0 +1,6 @@
+Hello! My name is Jolin Jiang, I'm a first-year Computer Science student
+at Drexel University on the 5-year track. I have previous experience with
+HTML and am currently learning Python and it's frameworks, such as flask
+and SQL. I'm in a team working on a project for a website that allows users
+to book dog walkers at ease.
+
