@@ -1,4 +1,0 @@
-Hi! My name is Brian Wang and I am a first year majoring in Software Engineering.
-I have previous experience in Java and some HTML. Currently, I am learning 
-Python and a Python micro-framework called Flask. I hope to learn more frameworks
-and libraries to build upon my previous experience by the end of the year.  
