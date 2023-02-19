@@ -16,8 +16,8 @@ Register Page
                 <div>
                     <table class="mt-5" style="margin:0 auto">
                         <tr>
-                            <td>{{ form.firstName(class="form-control", placeholder="First Name") }} </td>
-                            <td>{{ form.lastName(class="form-control", placeholder="Last Name") }}</td>
+                            <td>{{ form.firstName(class="form-control", placeholder="First Name", id="firstName") }} </td>
+                            <td>{{ form.lastName(class="form-control", placeholder="Last Name", id="lastName") }}</td>
                         </tr>
                     </table>
                     <hr class="h6 m-5 text-center" />
@@ -25,35 +25,35 @@ Register Page
 
                 <h1 class="h6 m-5">
                     <br />
-                    <div class="mb-2">{{ form.username.label() }}</div>
+                    <div class="mb-2">{{ form.userName.label() }}</div>
                     <div class="mb-2">
-                        {{ form.username(class="form-control", placeholder="Username") }}
+                        {{ form.userName(class="form-control", placeholder="Username", id="userName") }}
                     </div>
 
                     <div class="mb-2">{{ form.password.label() }}</div>
                     <div class="mb-2">
-                        {{ form.password(class="form-control", placeholder="Password") }}
+                        {{ form.password(class="form-control", placeholder="Password", id="password") }}
                     </div>
 
                     <div class="mb-2">{{ form.passwordConfirm.label() }}</div>
                     <div class="mb-2">
-                        {{ form.passwordConfirm(class="form-control", placeholder="Confirm Password") }}
+                        {{ form.passwordConfirm(class="form-control", placeholder="Confirm Password", id="passwordConfirm") }}
                     </div>
 
                     <div class="mb-2"> {{ form.email.label() }}</div>
                     <div class="mb-2">
-                        {{ form.email(class="form-control", placeholder="Email") }}
+                        {{ form.email(class="form-control", placeholder="Email", id="email") }}
                     </div>
                     <hr />
 
                     <div class="mb-2"> {{ form.postalCode.label() }}</div>
                     <div class="mb-2">
-                        {{ form.postalCode(class="form-control", placeholder="Zip Code") }}
+                        {{ form.postalCode(class="form-control", placeholder="Zip Code", id="postalCode") }}
                     </div>
 
                     <div class="mb-2"> {{ form.age.label() }}</div>
                     <div class="mb-2">
-                        {{ form.age(class="form-control", placeholder="Age") }}
+                        {{ form.age(class="form-control", placeholder="Age", id="age") }}
                     </div>
 
                 </h1>
