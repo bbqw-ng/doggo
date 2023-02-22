@@ -2,7 +2,7 @@ from argparse import _MutuallyExclusiveGroup
 from flask import render_template, request, session, redirect, flash
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm
-from workspace.emails import validate
+from workspace.validators import validate
 import mysql.connector
 import pymysql
 
@@ -18,7 +18,7 @@ class sqlhost():
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('home.html', username= session['userName'])
+    return render_template('home.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
@@ -39,35 +39,48 @@ def register_page():
 
         if len(userName) < 3:
             flash("Username must be at least 3 characters in length")
-            return redirect('/register')
+            return render_template('register.html', form=form)
         elif len(password) < 8:
             flash("Password must be at least 8 characters in length")
-            return redirect('/register')
+            return render_template('register.html', form=form)
         elif password != passwordConfirm:
             flash("Passwords do not match. Please retry again.")
-            return redirect('/register')
+            return render_template('register.html', form=form)
         elif validate(email) == 0:
             flash("Please enter a valid e-mail")
-            return redirect('/register')
+            return render_template('register.html', form=form)
         elif len(firstName) < 1:
             flash("Please enter a valid name.")
-            return redirect('/register')
+            return render_template('register.html', form=form)
         elif len(lastName) < 1:
             flash("Please enter a valid last name.")
-            return redirect('/register')
-        elif int(age) < 16:
-            flash("Please enter a valid age.")
-            return redirect('/register')
+            return render_template('register.html', form=form)
+        elif age:
+            if age.isdigit() == 0:
+                flash("Please enter a valid age.")
+                return render_template('register.html', form=form)
+            if int(age) < 16:
+                flash("You must be 16 years or older to register. (Please refer to our TOS)")
+                return render_template('register.html', form=form)
         elif len(postalCode) < 5:
             flash("Please enter a valid postal code.")
-            return redirect('/register')
-
-        
+            return render_template('register.html', form=form)
+        elif request.method == 'POST' and 'userName' in request.form and 'email' in request.form:
+            mycursor.execute('SELECT * FROM LoginInfo WHERE userName = %s', [userName])
+            existingUser = mycursor.fetchall()
+            if existingUser:
+                flash("This username already exists. Please try again.")
+                return render_template('register.html', form=form)
+            mycursor.execute('SELECT * FROM LoginInfo WHERE email = %s', [email])
+            existingEmail = mycursor.fetchall()
+            if existingEmail:
+                flash("This email has already been registered.")
+                return render_template('register.html', form=form)
         mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, userName, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userName, age, postalCode])
-
         db.commit()
         flash("Account created!")
         return redirect('/register')
+
     return render_template('register.html', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
