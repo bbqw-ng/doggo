@@ -1,71 +1,42 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Register Page
+Login Page
 {% endblock %}
 
+
+
 {% block content %}
+<div class="container my-5">
+    <div class="card">
+        <form method="POST" class="form-login">
+            <div class="card-header py-4 px-5 bg-light border-0">
+                <h4 class="mb-0 fw-bold">Login</h4>
+            </div>
 
-    <body>
-        <div>
-            <form method="POST" class="form-register" style="color:black">
-                <img class="rounded mx-auto d-block" src="https://thumbs.gfycat.com/DismalUglyBlueandgoldmackaw-size_restricted.gif" alt="" style="width:200px"/>
-                <h1 class="h2 font-weight-normal text-center">
-                    Let's get started!
-                </h1>
-                <div>
-                    <table class="mt-5" style="margin:0 auto">
-                        <tr>
-                            <td>{{ form.firstName(class="form-control", placeholder="First Name", id="firstName") }} </td>
-                            <td>{{ form.lastName(class="form-control", placeholder="Last Name", id="lastName") }}</td>
-                        </tr>
-                    </table>
-                    <hr class="h6 m-5 text-center" />
+            <div class="col-md-8 px-5">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">
+                        Username
+                    </label>
+                    {{form.userName(class="form-control", id="userName", style="max-width: 450px;")}}
                 </div>
 
-                <h1 class="h6 m-5">
-                    <br />
-                    <div class="mb-2">{{ form.userName.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.userName(class="form-control", placeholder="Username", id="userName") }}
-                    </div>
-
-                    <div class="mb-2">{{ form.password.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.password(class="form-control", placeholder="Password", id="password") }}
-                    </div>
-
-                    <div class="mb-2">{{ form.passwordConfirm.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.passwordConfirm(class="form-control", placeholder="Confirm Password", id="passwordConfirm") }}
-                    </div>
-
-                    <div class="mb-2"> {{ form.email.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.email(class="form-control", placeholder="Email", id="email") }}
-                    </div>
-                    <hr />
-
-                    <div class="mb-2"> {{ form.postalCode.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.postalCode(class="form-control", placeholder="Zip Code", id="postalCode") }}
-                    </div>
-
-                    <div class="mb-2"> {{ form.age.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.age(class="form-control", placeholder="Age", id="age") }}
-                    </div>
-
-                </h1>
-
-                <div class="text-center">
-                    {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        Password
+                    </label>
+                    {{form.password(class="form-control", id="password", style="max-width: 450px;")}}
                 </div>
 
-            </form>
-           
-        </div>
+            </div>
+            <div class="card footer text-end py-3 px-5 bg-light border-0">
+                <button type="submit" class="btn btn-primary btn-square" style="max-width: 450px;">Log In</button>
+            </div>
 
-    </body>
+        </form>
+    </div>
 
+
+</div>
 {% endblock %}
