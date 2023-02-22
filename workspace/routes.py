@@ -76,6 +76,7 @@ def register_page():
             if existingEmail:
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
+
         mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, userName, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userName, age, postalCode])
         db.commit()
         flash("Account created!")
@@ -110,3 +111,8 @@ def logout_btn():
     session.pop('userName', None)
     flash("Logged out.")
     return redirect('/login')
+
+@app.route("/search")
+def search_page():
+
+    return render_template('search.html')
