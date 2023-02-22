@@ -1,10 +1,8 @@
-from argparse import _MutuallyExclusiveGroup
 from flask import render_template, request, session, redirect, flash
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm
 from workspace.validators import validate
 import mysql.connector
-import pymysql
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -24,7 +22,9 @@ def home_page():
 def register_page():
     form = RegisterForm()
     db = sqlhost.db
+    db.reconnect()
     mycursor = db.cursor()
+
 
     if request.method == 'POST':
         userName = request.form['userName']
@@ -108,4 +108,5 @@ def login_page():
 def logout_btn():
     session.pop('loggedin', None)
     session.pop('userName', None)
+    flash("Logged out.")
     return redirect('/login')
