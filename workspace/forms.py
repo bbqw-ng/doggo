@@ -11,3 +11,7 @@ class RegisterForm(FlaskForm):
     age = StringField(label='Age')
     postalCode = StringField(label='Zip Code')
     submit = SubmitField(label='Create Account!')
+
+class LoginForm(FlaskForm):
+    userName = StringField(label='Username:')
+    password = PasswordField(label='Password:')

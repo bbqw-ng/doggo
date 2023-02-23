@@ -26,15 +26,37 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                {% if session['loggedin'] != true %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="register">Register</a>
                 </li>
+                {% endif %}
+                {% if session['loggedin'] == true %}
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     {% block content %}
 
     {% endblock %}
