@@ -112,7 +112,13 @@ def logout_btn():
     flash("Logged out.")
     return redirect('/login')
 
-@app.route("/search")
-def search_page():
+@app.route("/listings")
+def listings():
 
-    return render_template('search.html')
+    return render_template('listings.html')
+
+@app.route("/test")
+def test():
+
+    return render_template('briantestingyes.html')
+
