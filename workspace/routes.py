@@ -6,11 +6,11 @@ import mysql.connector
 
 class sqlhost():
     db = mysql.connector.connect(
-    host = 'sql9.freemysqlhosting.net',
+    host = 'realdoggydata.ct9fxw3xymn0.us-east-2.rds.amazonaws.com',
     port = '3306',
-    user = 'sql9599319',
-    passwd = 'doggy',
-    database = 'sql9599319'
+    user = 'admin',
+    passwd = 'doggowalk',
+    database = 'UserInfo'
     )
 
 @app.route("/")
@@ -27,7 +27,7 @@ def register_page():
 
 
     if request.method == 'POST':
-        userName = request.form['userName']
+        username = request.form['username']
         password = request.form['password']
         passwordConfirm = request.form['passwordConfirm']
         email = request.form['email']
@@ -37,7 +37,7 @@ def register_page():
         postalCode = request.form["postalCode"]
 
 
-        if len(userName) < 3:
+        if len(username) < 3:
             flash("Username must be at least 3 characters in length")
             return render_template('register.html', form=form)
         elif len(password) < 8:
@@ -65,8 +65,8 @@ def register_page():
         elif len(postalCode) < 5:
             flash("Please enter a valid postal code.")
             return render_template('register.html', form=form)
-        elif request.method == 'POST' and 'userName' in request.form and 'email' in request.form:
-            mycursor.execute('SELECT * FROM LoginInfo WHERE userName = %s', [userName])
+        elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
+            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
             existingUser = mycursor.fetchall()
             if existingUser:
                 flash("This username already exists. Please try again.")
@@ -77,7 +77,7 @@ def register_page():
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
 
-        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, userName, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userName, age, postalCode])
+        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userame, age, postalCode])
         db.commit()
         flash("Account created!")
         return redirect('/register')
@@ -89,14 +89,14 @@ def login_page():
     form = LoginForm()
     db = sqlhost.db
     mycursor = db.cursor()
-    if request.method == 'POST' and 'userName' in request.form and 'password' in request.form:
-        userName = request.form['userName']
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
         password = request.form['password']
-        mycursor.execute('SELECT * FROM LoginInfo WHERE userName = %s and password = %s', [userName, password])
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s and password = %s', [username, password])
         account = mycursor.fetchone()
         if account:
             session['loggedin'] = True
-            session['userName'] = account[1]
+            session['username'] = account[1]
             flash("Logged in!")
             return redirect('/login')
         else:
@@ -108,7 +108,7 @@ def login_page():
 @app.route("/logout")
 def logout_btn():
     session.pop('loggedin', None)
-    session.pop('userName', None)
+    session.pop('username', None)
     flash("Logged out.")
     return redirect('/login')
 
