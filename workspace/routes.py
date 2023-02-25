@@ -4,6 +4,7 @@ from workspace.forms import RegisterForm, LoginForm
 from workspace.validators import validate
 import mysql.connector
 
+
 class sqlhost():
     db = mysql.connector.connect(
     host = 'sql9.freemysqlhosting.net',
@@ -117,8 +118,14 @@ def listings():
 
     return render_template('listings.html')
 
-@app.route("/test")
-def test():
 
+#Test Redirects
+@app.route("/briantest")
+def briantest():
     return render_template('briantestingyes.html')
+
+@app.route("/alantest")
+def alantest():
+    return render_template('alantesting.html')
+
 
