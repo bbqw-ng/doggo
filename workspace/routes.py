@@ -147,6 +147,7 @@ def posting():
 #    userName = session['userName']
 #    # Return a template html with placeholder variables
 #    return render_template('user_post.html', userName = userName)
+
 @app.route("/search")
 @app.route("/listings")
 def listings():
@@ -154,6 +155,6 @@ def listings():
     return render_template('listings.html')
 
 @app.route("/test")
-def test():
 
+def test():
     return render_template('briantestingyes.html')
