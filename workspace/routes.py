@@ -68,7 +68,7 @@ def register_page():
                 flash("Please enter a valid postal code.")
                 return render_template('register.html', form=form)
         elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
-            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [userName])
+            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
             existingUser = mycursor.fetchall()
             if existingUser:
                 flash("This username already exists. Please try again.")
@@ -79,7 +79,7 @@ def register_page():
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
 
-        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userame, age, postalCode])
+        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, username, age, postalCode])
         db.commit()
         flash("Account created!")
         return redirect('/register')
@@ -90,6 +90,7 @@ def register_page():
 def login_page():
     form = LoginForm()
     db = sqlhost.db
+    db.reconnect()
     mycursor = db.cursor()
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
@@ -112,6 +113,7 @@ def login_page():
 def logout_btn():
     session.pop('loggedin', None)
     session.pop('username', None)
+    session.pop('userID', None)
     flash("Logged out.")
     return redirect('/login')
 
@@ -120,33 +122,37 @@ def posting():
     form = PostForm()
     db = sqlhost.db
     mycursor = db.cursor()
+
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
         schedule = request.form['schedule']
         timePosted = date.today()
-        
-        if len(title) < 10:
-            flash("Title must contain at least 10 characters.")
+        username = session['username']
+
+        if len(title) < 20 or len(title) > 250:
+            flash("Title must contain maximum 250 characters.")
             return render_template('user_post.html', form=form)
         elif len(description) < 30 or len(description) > 2000:
             #max and min characters
             flash("Too much/little characters. Must be at minimum 30 to 2000 characters.")
             return render_template('user_post.html', form=form)
         
-        mycursor.execute('INSERT INTO PostInfo(title, description, schedule, timePosted)', [title, description, schedule, timePosted])
+        mycursor.execute('INSERT INTO PostInfo(title, description, schedule, timePosted, username)', [title, description, schedule, timePosted, username])
         db.commit()
         flash("Listing posted!")
         #DEBUG: redirect to 'listings.html' after posting
         return render_template('user_post.html', form=form)
 
+    return render_template('user_post.html', form=form)
+
 
 # Unique variable routing system, on button press (e.g. Settings, Go to Profile) this is useful
-#@app.route("/user_post/<userName>")
-#def user_post(userName):
-#    userName = session['userName']
+#@app.route("/user_post/<username>")
+#def user_post(username):
+#    username = session['username']
 #    # Return a template html with placeholder variables
-#    return render_template('user_post.html', userName = userName)
+#    return render_template('user_post.html', username = username)
 
 @app.route("/search")
 @app.route("/listings")
