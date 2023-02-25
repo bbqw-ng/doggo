@@ -1,8 +1,10 @@
 from flask import render_template, request, session, redirect, flash
 from workspace import app
-from workspace.forms import RegisterForm, LoginForm
+from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
+from datetime import date
 import mysql.connector
+
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -62,11 +64,12 @@ def register_page():
             if int(age) < 16:
                 flash("You must be 16 years or older to register. (Please refer to our TOS)")
                 return render_template('register.html', form=form)
-        elif len(postalCode) < 5:
-            flash("Please enter a valid postal code.")
-            return render_template('register.html', form=form)
+        elif postalCode:
+            if len(postalCode) < 5 or postalCode.isdigit() == 0:
+                flash("Please enter a valid postal code.")
+                return render_template('register.html', form=form)
         elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
-            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
+            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [userName])
             existingUser = mycursor.fetchall()
             if existingUser:
                 flash("This username already exists. Please try again.")
@@ -106,19 +109,60 @@ def login_page():
     return render_template('login.html', form=form)
 
 @app.route("/logout")
+
 def logout_btn():
     session.pop('loggedin', None)
     session.pop('username', None)
     flash("Logged out.")
     return redirect('/login')
 
+@app.route("/listings/post", methods=['GET', 'POST'])
+def posting():
+    form = PostForm()
+    db = sqlhost.db
+    mycursor = db.cursor()
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        schedule = request.form['schedule']
+        timePosted = date.today()
+        
+        if len(title) < 10:
+            flash("Title must contain at least 10 characters.")
+            return render_template('user_post.html', form=form)
+        elif len(description) < 30 or len(description) > 2000:
+            #max and min characters
+            flash("Too much/little characters. Must be at minimum 30 to 2000 characters.")
+            return render_template('user_post.html', form=form)
+        
+        mycursor.execute('INSERT INTO PostInfo(title, description, schedule, timePosted)', [title, description, schedule, timePosted])
+        db.commit()
+        flash("Listing posted!")
+        #DEBUG: redirect to 'listings.html' after posting
+        return render_template('user_post.html', form=form)
+
+
+# Unique variable routing system, on button press (e.g. Settings, Go to Profile) this is useful
+#@app.route("/user_post/<userName>")
+#def user_post(userName):
+#    userName = session['userName']
+#    # Return a template html with placeholder variables
+#    return render_template('user_post.html', userName = userName)
+
+@app.route("/search")
 @app.route("/listings")
 def listings():
 
     return render_template('listings.html')
 
-@app.route("/test")
-def test():
 
+#Test Redirects
+@app.route("/briantest")
+def briantest():
     return render_template('briantestingyes.html')
+
+@app.route("/alantest")
+def alantest():
+    return render_template('alantesting.html')
+
 

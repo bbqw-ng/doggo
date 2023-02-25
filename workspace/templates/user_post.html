@@ -1,0 +1,43 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+Search Manager
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <form method="POST" class="form-post">
+        <div class="card-header py-4 px-5 bg-light border-0">
+            <h4 class="mb-0" fw-bold">Post</h4>
+        </div>
+        <div class="col-md-8 px-5">
+            <div class="mb-3">
+                <label for="title" class="form-label">
+                    Title
+                </label>
+                {{form.title(class="form-control", id="title", style="max-width: 500px;")}}
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">
+                    Title
+                </label>
+                {{form.description(class="form-control", id="description", style="max-width: 500px;")}}
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">
+                    Title
+                </label>
+                {{form.schedule(class="form-control", id="schedule", style="max-width: 500px;")}}
+            </div>
+
+        </div>
+
+
+    </form>
+
+</div>
+
+{% endblock %}
