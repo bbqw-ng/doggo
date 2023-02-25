@@ -69,7 +69,7 @@ def register_page():
                 flash("Please enter a valid postal code.")
                 return render_template('register.html', form=form)
         elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
-            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [userName])
+            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
             existingUser = mycursor.fetchall()
             if existingUser:
                 flash("This username already exists. Please try again.")
@@ -149,7 +149,6 @@ def posting():
 #    # Return a template html with placeholder variables
 #    return render_template('user_post.html', userName = userName)
 
-@app.route("/search")
 @app.route("/listings")
 def listings():
 
