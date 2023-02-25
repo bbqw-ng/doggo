@@ -23,11 +23,11 @@ Register Page
                     <hr class="h6 m-5 text-center" />
                 </div>
 
-                <h1 class="h6 m-5">
+                <div class="h6 m-5">
                     <br />
-                    <div class="mb-2">{{ form.userName.label() }}</div>
+                    <div class="mb-2">{{ form.username.label() }}</div>
                     <div class="mb-2">
-                        {{ form.userName(class="form-control", placeholder="Username", id="userName") }}
+                        {{ form.username(class="form-control", placeholder="Username", id="username") }}
                     </div>
 
                     <div class="mb-2">{{ form.password.label() }}</div>
@@ -56,7 +56,7 @@ Register Page
                         {{ form.age(class="form-control", placeholder="Age", id="age") }}
                     </div>
 
-                </h1>
+                </div>
 
                 <div class="text-center">
                     {{ form.submit(class="btn btn-lg btn-block btn-primary") }}

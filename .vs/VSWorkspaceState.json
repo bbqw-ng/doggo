@@ -1,13 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\static",
-    "\\TeamBios",
     "\\temp",
     "\\workspace",
-    "\\workspace\\templates",
-    "\\__pycache__"
+    "\\workspace\\templates"
   ],
-  "SelectedNode": "\\workspace\\validators.py",
+  "SelectedNode": "\\workspace\\routes.py",
   "PreviewInSolutionExplorer": false
 }
