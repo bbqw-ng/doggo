@@ -1,3 +1,4 @@
+from re import L
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 
@@ -15,3 +16,9 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     userName = StringField(label='Username:')
     password = PasswordField(label='Password:')
+
+class PostForm(FlaskForm):
+    title = StringField(label='Title:')
+    description = StringField(label='Description:')
+    schedule = StringField(label='Schedule:')
+    #automate date instead, would provide user authenticity, differentiate date posted, and schedule, maybe popout menu for the date
