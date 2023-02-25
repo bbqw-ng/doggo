@@ -4,8 +4,6 @@
 Login Page
 {% endblock %}
 
-
-
 {% block content %}
 <div class="container my-5">
     <div class="card">
@@ -16,10 +14,10 @@ Login Page
 
             <div class="col-md-8 px-5">
                 <div class="mb-3">
-                    <label for="userName" class="form-label">
+                    <label for="username" class="form-label">
                         Username
                     </label>
-                    {{form.userName(class="form-control", id="userName", style="max-width: 450px;")}}
+                    {{form.username(class="form-control", id="username", style="max-width: 450px;")}}
                 </div>
 
                 <div class="mb-3">
@@ -40,3 +38,4 @@ Login Page
 
 </div>
 {% endblock %}
+
