@@ -9,7 +9,8 @@ database = 'UserInfo'
 )
 
 cursor = db.cursor()
-cursor.execute("CREATE TABLE LoginInfo(userID int PRIMARY KEY AUTO_INCREMENT, email VARCHAR(30), password VARCHAR(30), firstName VARCHAR(20), lastName VARCHAR(20), username VARCHAR(20), age smallint UNSIGNED, postalCode VARCHAR(15))")
+#cursor.execute("CREATE TABLE PostInfo(title VARCHAR(250), username VARCHAR(20), timePosted VARCHAR(30), schedule VARCHAR(200), description VARCHAR(2000)")
+#cursor.execute("CREATE TABLE LoginInfo(userID int PRIMARY KEY AUTO_INCREMENT, email VARCHAR(30), password VARCHAR(30), firstName VARCHAR(20), lastName VARCHAR(20), username VARCHAR(20), age smallint UNSIGNED, postalCode VARCHAR(15))")
 db.commit()
 
 

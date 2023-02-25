@@ -77,7 +77,7 @@ def register_page():
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
 
-        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, userame, age, postalCode])
+        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, username, age, postalCode])
         db.commit()
         flash("Account created!")
         return redirect('/register')
