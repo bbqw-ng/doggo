@@ -5,6 +5,7 @@ from workspace.validators import validate
 from datetime import datetime
 import mysql.connector
 
+
 class sqlhost():
     db = mysql.connector.connect(
     host = 'realdoggydata.ct9fxw3xymn0.us-east-2.rds.amazonaws.com',
@@ -164,13 +165,19 @@ def posting():
 #    # Return a template html with placeholder variables
 #    return render_template('user_post.html', username = username)
 
-@app.route("/search")
 @app.route("/listings")
 def listings():
 
     return render_template('listings.html')
 
-@app.route("/test")
 
-def test():
+#Test Redirects
+@app.route("/briantest")
+def briantest():
     return render_template('briantestingyes.html')
+
+@app.route("/alantest")
+def alantest():
+    return render_template('alantesting.html')
+
+

@@ -5,23 +5,24 @@ Current Listings
 {% endblock %}
 
 {% block content %}
-<div class = "container" style = "margin: 2rem">
-    <div class = "d-flex flex-row">
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige;">
-            <h4 class = 'fw-bold'>
-                User Profile
-            </h4>
+<div style="display:flex; flex-direction: row; width: 100vw; height: 93vh; margin: 0; padding: 0; box-sizing: border-box;">
+    <div style = "width: 25%; border: 1px solid black;">
+        <h1 style = "text-align: center;">Your Profile</h1>
+        <div class="container" style="width:300px; height: 300px;">
+            <img style = "border-radius: 50%; object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFVKbuJcmlzG14hr4_D9Yozq46tM0UrP9EdQ&usqp=CAU">
         </div>
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige;"> 
-            <h4 class = 'fw-bold'>
-                Posts
-            </h4>
-        </div>
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige; display:flex; flex-direction: column;">
-            <h4 class = 'fw-bold'>
-                Create Post
-            </h4>
-        </div>
+    </div>
+    <div style = "width: 75%; border: 1px solid black;">
+        <h1 style = "text-align: center;">Posts</h1>
+            <div style = "display: flex; justify-content: center;">
+                <h3 style = "display:flex; height: 50px; width: 1000px; align-items: center; margin: 1rem; border: 1px solid black;">
+                   <ul style = "align-items: center; list-style: none;">
+                    <li>
+                        <button>
+                    </li>
+                   </ul>
+                </h2>
+            </div>
     </div>
 </div>
 {% endblock %}
