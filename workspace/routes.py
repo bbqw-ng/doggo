@@ -100,7 +100,7 @@ def login_page():
         account = mycursor.fetchone()
         if account:
             session['loggedin'] = True
-            session['username'] = account[1]
+            session['username'] = account[5]
             session['userID'] = account[0]
             session['postalCode'] = account[7]
             flash("Logged in!")
@@ -117,6 +117,7 @@ def logout_btn():
     session.pop('loggedin', None)
     session.pop('username', None)
     session.pop('userID', None)
+    session.pop('postalCode', None)
     flash("Logged out.")
     return redirect('/login')
 
