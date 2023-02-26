@@ -153,7 +153,7 @@ def posting():
         db.commit()
         flash("Listing posted!")
         #DEBUG: redirect to 'listings.html' after posting
-        return render_template('user_post.html', form=form)
+        return render_template('listings.html', form=form)
 
     return render_template('user_post.html', form=form)
 
