@@ -5,23 +5,43 @@ Current Listings
 {% endblock %}
 
 {% block content %}
-<div class = "container" style = "margin: 2rem">
-    <div class = "d-flex flex-row">
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige;">
-            <h4 class = 'fw-bold'>
-                User Profile
-            </h4>
-        </div>
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige;"> 
-            <h4 class = 'fw-bold'>
-                Posts
-            </h4>
-        </div>
-        <div class = "card-header" style = "border-radius: 1rem; background-color: beige; display:flex; flex-direction: column;">
-            <h4 class = 'fw-bold'>
-                Create Post
-            </h4>
+<div style="display:flex; flex-direction: row; width: 100vw; height: 93.19vh; margin: 0; padding: 0; box-sizing: border-box;">
+    <div style = "width: 23%; border: 1px solid rgb(180, 180, 180);">
+        <h2 style = "display: flex; justify-content: center; text-align: center; padding: .25rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 3rem 1.5rem 3rem; color: rgb(208, 209, 209);">Your Profile</h2>
+        <div class="container" style="width:300px; height: 300px;">
+            <img style = "border-radius: 50%; object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFVKbuJcmlzG14hr4_D9Yozq46tM0UrP9EdQ&usqp=CAU">
         </div>
     </div>
+    <div style = "width: 77%; border: 1px solid rgb(180, 180, 180);">
+        
+        <h2 style = "display: flex; justify-content: center; text-align: center; padding: .25rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 3rem 1.5rem 3rem; color: rgb(208, 209, 209)">Posts</h2>
+            <div style = "display: flex; justify-content: center; align-items:center; height: 2rem;">
+                
+                <h3 style = "display: flex; width: 50%; align-items: center; justify-content: space-between; border: 1px solid black; border-radius: .3rem; margin: 0;">
+                   <label style = " margin: 0 1rem 0 1rem; font-size: medium;">
+                        Select role:
+                        <select style = "margin: .2rem 0 .2rem 0; border-color: rgb(194, 191, 191); border-radius: .2rem;">
+                            <option value = "">Dog Owner</option>
+                            <option value = "">Dog Walker</option>
+                        </select>
+                   </label>
+                   <label style = "margin: 0 1rem 0 1rem; font-size: medium;"> 
+                        Select a filter:
+                        <select style = "margin: .2rem 0 .2rem 0; border-color: rgb(194, 191, 191); border-radius: .2rem;">
+                            <option value = "">By</option>
+                            <option value = "">By</option>
+                            <option value = "">By Date</option>
+                        </select>
+                   </label>
+                </h3>
+
+        
+        <div style = "display: flex;"></div>
+        
+        </div>
+        
+
+    </div>
 </div>
+
 {% endblock %}
