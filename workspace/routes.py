@@ -1,10 +1,9 @@
-from flask import render_template, request, session, redirect, flash
+from flask import render_template, request, session, redirect, flash, Flask
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
 from datetime import date
 import mysql.connector
-
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -155,7 +154,6 @@ def listings():
 
     return render_template('listings.html')
 
-<<<<<<< HEAD
 
 #Test Redirects
 @app.route("/briantest")
@@ -167,9 +165,3 @@ def alantest():
     return render_template('alantesting.html')
 
 
-=======
-@app.route("/test")
-
-def test():
-    return render_template('briantestingyes.html')
->>>>>>> 5079e0a5b20cdda4965a27a5d44bcef5586f7ce8
