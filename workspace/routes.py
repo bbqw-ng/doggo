@@ -2,7 +2,7 @@ from flask import render_template, request, session, redirect, flash
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
-from datetime import date
+from datetime import datetime
 import mysql.connector
 
 
@@ -91,7 +91,8 @@ def register_page():
 def login_page():
     form = LoginForm()
     db = sqlhost.db
-    mycursor = db.cursor()
+    db.reconnect()
+    mycursor = db.cursor(buffered=True)
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
@@ -99,7 +100,9 @@ def login_page():
         account = mycursor.fetchone()
         if account:
             session['loggedin'] = True
-            session['username'] = account[1]
+            session['username'] = account[5]
+            session['userID'] = account[0]
+            session['postalCode'] = account[7]
             flash("Logged in!")
             return redirect('/login')
         else:
@@ -113,41 +116,55 @@ def login_page():
 def logout_btn():
     session.pop('loggedin', None)
     session.pop('username', None)
+    session.pop('userID', None)
+    session.pop('postalCode', None)
     flash("Logged out.")
     return redirect('/login')
 
-@app.route("/listings/post", methods=['GET', 'POST'])
+@app.route("/post", methods=['GET', 'POST'])
 def posting():
     form = PostForm()
     db = sqlhost.db
     mycursor = db.cursor()
+    db.reconnect()
+
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
         schedule = request.form['schedule']
-        timePosted = date.today()
-        
-        if len(title) < 10:
-            flash("Title must contain at least 10 characters.")
+        #need to turn into EST in the future, or adapt to geographical location
+        defaultTime = datetime.now()
+        timePosted = defaultTime.strftime("%m/%d/%Y %H:%M")
+        username = session['username']
+        userID = session['userID']
+        postalCode = session['postalCode']
+
+        if len(title) < 5 or len(title) > 250:
+            flash("Title must contain maximum 250 characters.")
             return render_template('user_post.html', form=form)
         elif len(description) < 30 or len(description) > 2000:
             #max and min characters
-            flash("Too much/little characters. Must be at minimum 30 to 2000 characters.")
+            flash("Description must be at least 30 to 2000 characters.")
+            return render_template('user_post.html', form=form)
+        elif len(schedule) < 1:
+            flash("Please insert a schedule")
             return render_template('user_post.html', form=form)
         
-        mycursor.execute('INSERT INTO PostInfo(title, description, schedule, timePosted)', [title, description, schedule, timePosted])
+        mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description) VALUES (%s, %s, %s, %s, %s, %s, %s)', [userID, title, username, schedule, timePosted, postalCode, description])
         db.commit()
         flash("Listing posted!")
         #DEBUG: redirect to 'listings.html' after posting
-        return render_template('user_post.html', form=form)
+        return render_template('listings.html', form=form)
+
+    return render_template('user_post.html', form=form)
 
 
 # Unique variable routing system, on button press (e.g. Settings, Go to Profile) this is useful
-#@app.route("/user_post/<userName>")
-#def user_post(userName):
-#    userName = session['userName']
+#@app.route("/user_post/<username>")
+#def user_post(username):
+#    username = session['username']
 #    # Return a template html with placeholder variables
-#    return render_template('user_post.html', userName = userName)
+#    return render_template('user_post.html', username = username)
 
 @app.route("/listings")
 def listings():
