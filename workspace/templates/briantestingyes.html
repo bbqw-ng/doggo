@@ -5,6 +5,7 @@ Current Listings
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="../static/listings.css">
 <div style="display:flex; flex-direction: row; width: auto; height: auto; margin: 0; padding: 0; box-sizing: border-box;">
     
     <div style = "width: 20%">
@@ -16,25 +17,32 @@ Current Listings
 
     <div style = "display:flex; flex-direction: column; width: 60%;">
         <h2 style = "display: flex; justify-content: center; text-align: center; padding: .25rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 3rem 1.5rem 3rem; color: rgb(208, 209, 209)">Posts</h2>
-            <div style = "display: flex; justify-content: center; align-items:center; height: 2rem;">
+            <div style = "display: flex; justify-content: center; align-items:center; height: 2rem; margin: 0 0 0 1rem">
                 
                 <h3 style = "display: flex; width: 50%; align-items: center; justify-content: space-between; border: 1px solid black; border-radius: .3rem; margin: 0;">
                    <label style = " margin: 0 1rem 0 1rem; font-size: medium;">
-                        Select role:
-                        <select style = "margin: .2rem 0 .2rem 0; border-color: rgb(194, 191, 191); border-radius: .2rem;">
-                            <option value = "">Dog Owner</option>
-                            <option value = "">Dog Walker</option>
-                        </select>
+                        Sort By:
                    </label>
+                        <button class = "filterbutton" type = "button">
+                            Distance
+                        </button>
+                        <button class = "filterbutton" type = "button">
+                            Time
+                        </button>
                    <label style = "margin: 0 1rem 0 1rem; font-size: medium;"> 
-                        Select a filter:
-                        <select style = "margin: .2rem 0 .2rem 0; border-color: rgb(194, 191, 191); border-radius: .2rem;">
-                            <option value = "">By</option>
-                            <option value = "">By</option>
-                            <option value = "">By Date</option>
-                        </select>
+                        View:
                    </label>
+                        <button class = "filterbutton" type = "button">
+                            asdausjd
+                        </button>
+                        <button class = "filterbutton" type = "button">
+                            asdiasjdi
+                        </button>
                 </h3>
+
+                <div style = "display: flex; align-items: center; justify-content: space-between; border: 1px solid black; border-radius: .3rem; margin: 0 0 0 2.5rem;">
+                        <button style = "background-color:white; font-size: medium; border: 0; margin: .1rem; padding: .2rem" name = "i am button" type = "button" value = "">Create a Post</button>
+                </div>
             </div>
     </div>
         
@@ -43,5 +51,6 @@ Current Listings
     </div>
     
 </div>
+<script src="../static/test.js"></script>
 
 {% endblock %}
