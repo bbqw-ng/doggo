@@ -9,7 +9,11 @@
 }
 
 #register_box{
-    background-color: grey;
     display: inline-block;
     text-decoration: none;
+    padding: 10px;
+    font-size: 30px;
+    top: 50%;
+    left: 25%;
+    position: absolute;
 }

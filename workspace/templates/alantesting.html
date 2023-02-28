@@ -61,7 +61,7 @@
     <video autoplay loop muted playsinline id="bg-video">
         <source src="{{ url_for('static', filename='dog.mp4') }}" type="video/mp4">
     </video>
-    <a id="register_box" href="register">Become A Dog Walker Today!</a>
+    <a id="register_box" class="bg-dark" href="register">Join DogGo!</a>
     <div class="container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
