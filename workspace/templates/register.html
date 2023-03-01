@@ -9,51 +9,70 @@ Register Page
 
         <div>
             <form method="POST" class="form-register" style="color:black">
-                <img class="rounded mx-auto d-block" src="https://thumbs.gfycat.com/DismalUglyBlueandgoldmackaw-size_restricted.gif" alt="" style="width:200px"/>
+                <img class="rounded mx-auto d-block" src="https://thumbs.gfycat.com/DismalUglyBlueandgoldmackaw-size_restricted.gif" alt="" style="width:200px;"/>
                 <h1 class="h2 font-weight-normal text-center">
                     Let's get started!
                 </h1>
-                <div>
-                    <table class="mt-5" style="margin:0 auto">
-                        <tr>
-                            <td>{{ form.firstName(class="form-control", placeholder="First Name", id="firstName") }} </td>
-                            <td>{{ form.lastName(class="form-control", placeholder="Last Name", id="lastName") }}</td>
-                        </tr>
-                    </table>
-                    <hr class="h6 m-5 text-center" />
-                </div>
+                <div class="m-5" style = "display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: small; font-weight: 600;">
 
-                <div class="h6 m-5">
-                    <br />
-                    <div class="mb-2">{{ form.username.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.username(class="form-control", placeholder="Username", id="username") }}
-                    </div>
+                    <div class = "card" style = "border-width: .15rem;">
 
-                    <div class="mb-2">{{ form.password.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.password(class="form-control", placeholder="Password", id="password") }}
-                    </div>
+                        <div style = "display: flex; flex-direction: row; height: 4rem; margin: 1rem 0 0 0">
+                            <div style = "display: flex; flex-direction: column; margin: 0 1rem 1rem 1rem"> 
+                                <div style = "padding: 0 0 0 .2rem;">{{ form.firstName.label() }}</div>
+                                    <div>
+                                        {{ form.firstName(class="form-control", placeholder="First Name", id="firstName") }}
+                                    </div>
+                            </div> 
 
-                    <div class="mb-2">{{ form.passwordConfirm.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.passwordConfirm(class="form-control", placeholder="Confirm Password", id="passwordConfirm") }}
-                    </div>
+                            <div class="mb-2" style = "display: flex; flex-direction: column; margin: 0 1rem 1rem 1rem"> 
+                                <div style = "padding: 0 0 0 .2rem;">{{ form.lastName.label() }}</div>
+                                    <div >
+                                    {{ form.lastName(class="form-control", placeholder="Last Name", id="lastName") }}
+                                    </div>
+                            </div>
+                        </div>
 
-                    <div class="mb-2"> {{ form.email.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.email(class="form-control", placeholder="Email", id="email") }}
-                    </div>
-                    <hr />
+                        <div style = "display: flex; flex-direction: column; margin: 0 1rem 0 1rem">
+                            <div style = "padding: 0 0 0 .2rem;">{{ form.username.label() }}</div>
+                                <div class = "mb-2">
+                                {{ form.username(class="form-control", placeholder="Username", id="username") }}
+                                </div>
 
-                    <div class="mb-2"> {{ form.postalCode.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.postalCode(class="form-control", placeholder="Zip Code", id="postalCode") }}
-                    </div>
+                            <div style = "padding: 0 0 0 .2rem;">{{ form.password.label() }}</div>
+                                <div class="mb-2">
+                                {{ form.password(class="form-control", placeholder="Password", id="password") }}
+                                </div>
 
-                    <div class="mb-2"> {{ form.age.label() }}</div>
-                    <div class="mb-2">
-                        {{ form.age(class="form-control", placeholder="Age", id="age") }}
+                            <div style = "padding: 0 0 0 .2rem;">{{ form.passwordConfirm.label() }}</div>
+                                <div class="mb-2">
+                                {{ form.passwordConfirm(class="form-control", placeholder="Confirm Password", id="passwordConfirm") }}
+                                </div>
+
+                            <div style = "padding: 0 0 0 .2rem;"> {{ form.email.label() }}</div>
+                                <div class="mb-2">
+                                {{ form.email(class="form-control", placeholder="Email", id="email") }}
+                                </div>
+                        </div>
+                        
+                        <div style = "display: flex; flex-direction: row; justify-content: center;">
+
+                            <div style = "display: flex; flex-direction: column; margin: 0 1rem 1rem 1rem;"> 
+                                <div style = "padding: 0 0 0 .2rem;">{{ form.postalCode.label() }}</div>
+                                    <div class="mb-2">
+                                    {{ form.postalCode(class="form-control", placeholder="Zip Code", id="postalCode") }}
+                                    </div>
+                            </div>
+
+                            <div style = "display: flex; flex-direction: column; margin: 0 1rem 1rem 1rem"> 
+                                 <div style = "padding: 0 0 0 .2rem;"> {{ form.age.label() }}</div>
+                                    <div class="mb-2">
+                                    {{ form.age(class="form-control", placeholder="Age", id="age") }}
+                                    </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
