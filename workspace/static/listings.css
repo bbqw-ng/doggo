@@ -1,0 +1,11 @@
+.bold{
+    font-weight: bold !important;
+    transition:all 50ms ease-in;
+    transform: scale(1.1);
+}
+
+.filterbutton{
+    border: 0;
+    background-color: transparent;
+    font-size: small;
+}
