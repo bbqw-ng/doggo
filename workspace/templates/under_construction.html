@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <img id="bg" src="{{ url_for('static', filename='construct.png') }}" alt="User Image">
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="{{ url_for('static', filename='kodakblack.mp4') }}" type="video/mp4">
+    </video>
 </body>
 </html>
 <style>
