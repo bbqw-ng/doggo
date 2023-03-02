@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,65 +18,14 @@
         {% endblock %}
     </title>
 </head>
+
+
+{% block content %}
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a href="home">
-            <img class = "p-1 ms-2" src="https://thumbs.gfycat.com/AthleticRadiantAcornbarnacle-max-1mb.gif" alt="moving doggo" width="80px" height="80px">
-        </a>
-
-        <a class="navbar-brand" style = "padding: 0 1rem 0 1rem; margin: 0;" href="home">DogGo!</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only"></span></a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if session['loggedin'] != true %}
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register">Register</a>
-                </li>
-                {% endif %}
-                {% if session['loggedin'] == true %}
-                <li id = "posting" class="nav-item">
-                    <a class="nav-link" href="listings">Listings</a>
-                </li>
-                {% endif %}
-            </ul>
-
-            <ul class = "navbar-nav ms-auto float-right">
-                {% if session['loggedin'] == true %}
-                <li class="d-flex justify-content-end nav-item" style = "padding: 0 1rem 0 1.2rem">
-                    <a class="nav-link" href="logout">Logout</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
     <video autoplay loop muted playsinline id="bg-video">
         <source src="{{ url_for('static', filename='dog.mp4') }}" type="video/mp4">
     </video>
     <a id="register_box" class="bg-dark" href="register">Join DogGo!</a>
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <span>{{ message }}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-    </div>
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -86,3 +36,4 @@
     -->
 </body>
 </html>
+{% endblock %}
