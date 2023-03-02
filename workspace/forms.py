@@ -18,7 +18,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(label='Password')
 
 class PostForm(FlaskForm):
-    title = StringField(label='Title:')
-    description = StringField(label='Description:')
-    schedule = StringField(label='Schedule:')
+    title = StringField(label='Title')
+    description = StringField(label='Description')
+    schedule = StringField(label='Schedule')
     #automate date instead, would provide user authenticity, differentiate date posted, and schedule, maybe popout menu for the date
