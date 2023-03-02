@@ -52,11 +52,20 @@
 
             <ul class = "navbar-nav ms-auto float-right">
                 {% if session['loggedin'] == true %}
-                <li class="d-flex justify-content-end nav-item" style = "padding: 0 1rem 0 1.2rem">
+                <li class="d-flex justify-content-end nav-item" style= "padding: 0 1rem 0 1.2rem">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+
+                <li id="posting" class="nav-item">
+                    <a class="nav-link" href="listings">Listings</a>
+                </li>
+                <li class="d-flex justify-content-end nav-item" style="padding: 0 1rem 0 1.2rem">
                     <a class="nav-link" href="logout">Logout</a>
                 </li>
+
                 {% endif %}
             </ul>
+
         </div>
     </nav>
 

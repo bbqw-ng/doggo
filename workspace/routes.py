@@ -4,6 +4,10 @@ from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
 from datetime import datetime
 import mysql.connector
+<<<<<<< HEAD
+import urllib3
+=======
+>>>>>>> 75b58176137a38daa3f12cc785563dec9da6d87b
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -152,7 +156,7 @@ def posting():
         mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description) VALUES (%s, %s, %s, %s, %s, %s, %s)', [userID, title, username, schedule, timePosted, postalCode, description])
         db.commit()
         flash("Listing posted!")
-        #DEBUG: redirect to 'listings.html' after posting
+
         return render_template('listings.html', form=form)
 
     return render_template('user_post.html', form=form)
@@ -169,6 +173,22 @@ def posting():
 def listings():
 
     return render_template('listings.html')
+
+@app.route("/users/<username>", methods=['GET', 'POST'])
+def profile(username):
+    db = sqlhost.db
+    mycursor = db.cursor()
+    db.reconnect()
+
+    url = urllib3.PoolManager()
+    r = url.request
+
+    print(r.data)
+
+    print(url)
+    username = None
+
+    return render_template('user_profile.html', username = username)
 
 
 #Test Redirects
