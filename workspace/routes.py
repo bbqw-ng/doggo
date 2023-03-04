@@ -190,10 +190,6 @@ def profile(username):
 
 
 #Test Redirects
-@app.route("/briantest")
-def briantest():
-    return render_template('briantestingyes.html')
-
 @app.route("/alantest")
 def alantest():
     return render_template('alantesting.html')
