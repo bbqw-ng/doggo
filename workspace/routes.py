@@ -167,8 +167,12 @@ def posting():
 #    # Return a template html with placeholder variables
 #    return render_template('user_post.html', username = username)
 
-@app.route("/listings")
+@app.route("/listings", methods=['GET', 'POST'])
 def listings():
+    db = sqlhost.db
+    mycursor = db.cursor()
+    db.reconnect()
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s and password = %s', [username, password])
 
     return render_template('listings.html')
 
