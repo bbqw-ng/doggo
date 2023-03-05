@@ -51,38 +51,41 @@ Current Listings
             </div>
         
         <div style = "display: flex; flex-direction: column; flex-grow: 1; border: 2px solid rgb(207, 207, 207); margin: .5rem 1rem .5rem 1rem; border-radius: 5px; overflow:auto;">    
+            
+            {% for x in row %}
             <div style = "display: flex; flex-direction: column; margin: .6rem; height: 10rem; border: .5px solid rgb(187, 192, 190); border-radius: 10px; background-color: rgb(240, 240, 240); min-height: 10rem;">
                 
                 <div style = "display: flex; justify-content: space-between;">
                     <div style ="display: flex; justify-content: center; align-items: center; margin: .2rem 0 0 .6rem ; font-size: large; font-weight: 600;">
-                        Brian Wang
+                        {x[3]}
                     </div>
                     <div style = "display: flex; justify-content: center; align-items: center;">
-                        Title: auhdihuiashduiahsudhausidhiuasd
+                        {x[2]}
                     </div>
                     <div style = "display:flex; font-size: small; height: 1rem; justify-content: center; align-items: center; margin: .2rem .5rem 0 0">
                         <div style = "font-weight: 100;">
-                            Date Posted: 02/25/2023 19:12
+                            Date Posted: {x[4]}
                         </div>
                     </div>
                 </div>
 
                 <div style = "display: flex; flex-direction: column; flex-grow: 1;">
                     <div style = "margin: .7rem .5rem 0 1.5rem;">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat ducimus odit nam obcaecati exercitationem dolorem sunt quisquam nisi molestias necessitatibus, nobis, repellendus amet maxime nesciunt in corporis nemo ea dicta!</p>
+                        {x[7]}
                     </div>
                 </div>
 
                 <div style = "display: flex; font-size: small; height: 1rem; justify-content: space-between; align-items: center; margin: 0 .5rem .2rem 0">
                     <div style = "margin: 0 0 0 .5rem">
-                        ZIP Code: 19146
+                        ZIP Code: {x[5]}
                     </div>
                     <div>
-                        Schedule: 02/26/2023 3:30 PM - 02/26/2023 4:20 PM
+                        Schedule: {x[6]}
                     </div>
                 </div>
 
             </div>
+            {% endfor %}
 
         </div>
 

@@ -1,0 +1,12 @@
+#postInfo = mycursor.execute("SELECT * FROM PostInfo")
+    #postNum = postInfo[0]
+    #title = postInfo[2]
+    #username = postInfo[3]
+    #timePosted = postInfo[4]
+    #postalCode = postInfo[5]
+    #schedule = postInfo[6]
+    #description = postInfo[7]
+    #status = postInfo[8]
+    #status is if the post has been completed or not yet.
+    #if we want to we can set an if statement to check if it has been completed or not
+    #and if it is we can make it so the for loop doesn't display it on the listings page.
