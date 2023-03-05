@@ -175,7 +175,6 @@ def listings():
     mycursor.execute("SELECT * FROM PostInfo")
 
     row = mycursor.fetchall()
-    print(row[1])
 
     return render_template('listings.html', row = row)
 
