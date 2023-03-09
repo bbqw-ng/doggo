@@ -4,8 +4,6 @@ from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
 from datetime import datetime
 import mysql.connector
-import urllib3
-
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -172,20 +170,19 @@ def listings():
 
     return render_template('listings.html')
 
-@app.route("/users/<username>", methods=['GET', 'POST'])
+@app.route("/user/<username>", methods=['GET', 'POST'])
 def profile(username):
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
 
-    url = urllib3.PoolManager()
-    r = url.request
-
-    print(r.data)
-
-    print(url)
-    username = None
-
+    mycursor.execute('SELECT username FROM LoginInfo')
+    existingUser = mycursor.fetchall()
+    for name in existingUser:
+        if name[0] == username:
+            print(True)
+        else:
+            print(False)
     return render_template('user_profile.html', username = username)
 
 
