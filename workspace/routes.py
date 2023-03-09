@@ -165,10 +165,16 @@ def posting():
 #    # Return a template html with placeholder variables
 #    return render_template('user_post.html', username = username)
 
-@app.route("/listings")
+@app.route("/listings", methods=['GET', 'POST'])
 def listings():
+    db = sqlhost.db
+    mycursor = db.cursor()
+    db.reconnect()
+    mycursor.execute("SELECT * FROM PostInfo")
 
-    return render_template('listings.html')
+    row = mycursor.fetchall()
+
+    return render_template('listings.html', row = row)
 
 @app.route("/user/<username>", methods=['GET', 'POST'])
 def profile(username):
