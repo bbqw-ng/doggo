@@ -200,4 +200,7 @@ def profile(username):
 def alantest():
     return render_template('alantesting.html')
 
+@app.route("/usertest")
+def profile_test():
+    return render_template("user_profile.html")
 
