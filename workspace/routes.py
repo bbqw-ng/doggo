@@ -9,11 +9,11 @@ import urllib3
 
 class sqlhost():
     db = mysql.connector.connect(
-    host = 'realdoggydata.ct9fxw3xymn0.us-east-2.rds.amazonaws.com',
+    host = 'doggoserver.mysql.database.azure.com',
     port = '3306',
-    user = 'admin',
-    passwd = 'doggowalk',
-    database = 'UserInfo'
+    user = 'mainadmin',
+    password = '9jznqua4y5T@',
+    database = 'userinfo'
     )
 
 @app.route("/")
