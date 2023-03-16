@@ -19,7 +19,7 @@ class sqlhost():
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('under_construction.html')
+    return render_template('alantesting.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
@@ -151,7 +151,7 @@ def posting():
             flash("Please insert a schedule")
             return render_template('user_post.html', form=form)
         
-        mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description) VALUES (%s, %s, %s, %s, %s, %s, %s)', [userID, title, username, schedule, timePosted, postalCode, description])
+        mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description, status) VALUES (%s, %s, %s, %s, %s, %s, %s, 0)', [userID, title, username, schedule, timePosted, postalCode, description])
         db.commit()
         flash("Listing posted!")
 
@@ -172,7 +172,7 @@ def listings():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute("SELECT * FROM PostInfo ORDER BY postNum DESC")
+    mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
 
     row = mycursor.fetchall()
     return render_template('listings.html', row = row)
