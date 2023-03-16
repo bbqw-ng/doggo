@@ -177,8 +177,8 @@ def listings():
     row = mycursor.fetchall()
     return render_template('listings.html', row = row)
 
-@app.route("/users/<username>", methods=['GET', 'POST'])
-def profile(username):
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
@@ -186,9 +186,9 @@ def profile(username):
     url = urllib3.PoolManager()
     r = url.request
 
-    print(r.data)
+    #print(r.data)
 
-    print(url)
+    #print(url)
     username = None
 
     return render_template('user_profile.html', username = username)
