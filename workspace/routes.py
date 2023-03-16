@@ -178,25 +178,30 @@ def listings():
     row = mycursor.fetchall()
     return render_template('listings.html', row = row)
 
+#User's Profile
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
     name = session["username"]
     id = "{:03d}".format(session['userID'])
-    return render_template('user_profile.html', username = name, userID = id )
+    return render_template('user_profile.html', username = name, userID = id ) #takes data from current user sesh
 
+
+#Dyamic Profiles 
+#To access profiles: http://127.0.0.1:5000/profile/[username]
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def other_profile(username):
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute('SELECT userID, username FROM LoginInfo')
+    mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
     existingUser = mycursor.fetchall()
-    filtered_list = [t for t in existingUser if t[1] == username]
+    filtered_list = [t for t in existingUser if t[1] == username] #makes if list of userID and username iif username matches database
     print(filtered_list)
-    if len(filtered_list) == 1:
+    if len(filtered_list) == 1: #idk what it does but it works
         return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
     else: 
-        return render_template("under_construction.html")
+        return render_template("under_construction.html") #if no username exists in database takes you to invalid page
+
 #Test Redirects
 @app.route("/alantest")
 def alantest():
