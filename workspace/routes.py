@@ -180,20 +180,21 @@ def listings():
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
+    name = session["username"]
+    id = "{:03d}".format(session['userID'])
+    return render_template('user_profile.html', username = name, userID = id )
+
+@app.route("/profile/<username>", methods=['GET', 'POST'])
+def other_profile(username):
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-
     mycursor.execute('SELECT username FROM LoginInfo')
     existingUser = mycursor.fetchall()
-    for username in existingUser:
-        if username[0] == username:
-            print(True)
-        else:
-            print(False)
-    return render_template('user_profile.html', username = username)
-
-
+    filtered_list = [t[0] for t in existingUser if t[0] == username]
+    if len(filtered_list) == 1:
+        return render_template('user_profile.html', username = filtered_list[0], userID = "0")
+    else: return "INVALID USERNAME"
 #Test Redirects
 @app.route("/alantest")
 def alantest():

@@ -11,9 +11,11 @@
 {% block content %}
 <div class="user">
     <div class="user_container" id="user_profile">
-        <img id="user_pic" src="{{ url_for('static',filename='dawg.jpg') }}" alt="Profile Picture">  <!-- Insert profile pic -->
-        <div id="user_name"><h1>heycutey</h1></div> <!-- Insert name  -->
-        <div id="user_id">@002</div> <!-- Insert unique id or maybe delete idk :( -->
+        <img id="user_pic" src="{{ url_for('static',filename='rock-frog.jpg') }}" alt="Profile Picture">  <!-- Insert profile pic -->
+        <div id="user_info">
+            <div id="user_name"><h1>{{username}}</h1></div> <!-- Insert name  -->
+            <div id="user_id">@{{userID}}</div> <!-- Insert unique id or maybe delete idk :( -->
+        </div>
     </div>
     <div class="user_container" id="user_tabs">
         <div><h5>Description</h5></div> <!--  -->
