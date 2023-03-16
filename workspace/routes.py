@@ -189,12 +189,14 @@ def other_profile(username):
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute('SELECT username FROM LoginInfo')
+    mycursor.execute('SELECT userID, username FROM LoginInfo')
     existingUser = mycursor.fetchall()
-    filtered_list = [t[0] for t in existingUser if t[0] == username]
+    filtered_list = [t for t in existingUser if t[1] == username]
+    print(filtered_list)
     if len(filtered_list) == 1:
-        return render_template('user_profile.html', username = filtered_list[0], userID = "0")
-    else: return "INVALID USERNAME"
+        return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
+    else: 
+        return render_template("under_construction.html")
 #Test Redirects
 @app.route("/alantest")
 def alantest():
