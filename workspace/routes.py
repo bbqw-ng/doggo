@@ -17,7 +17,7 @@ class sqlhost():
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('under_construction.html')
+    return render_template('alantesting.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
@@ -36,7 +36,8 @@ def register_page():
         lastName = request.form["lastName"]
         age = request.form["age"]
         postalCode = request.form["postalCode"]
-
+        print(request.method)
+        print(username, email)
 
         if len(username) < 3:
             flash("Username must be at least 3 characters in length")
@@ -70,12 +71,14 @@ def register_page():
         elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
             mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
             existingUser = mycursor.fetchall()
+            print(existingUser)
             if existingUser:
                 flash("This username already exists. Please try again.")
                 return render_template('register.html', form=form)
             mycursor.execute('SELECT * FROM LoginInfo WHERE email = %s', [email])
             existingEmail = mycursor.fetchall()
             if existingEmail:
+                print(existingEmail)
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
 
