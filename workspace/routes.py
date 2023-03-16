@@ -173,10 +173,11 @@ def listings():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
+    name = session["username"]
     mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
 
     row = mycursor.fetchall()
-    return render_template('listings.html', row = row)
+    return render_template('listings.html',username = name, row = row)
 
 #User's Profile
 @app.route("/profile", methods=['GET', 'POST'])
