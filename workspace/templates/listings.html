@@ -6,25 +6,27 @@ Current Listings
 
 {% block content %}
 <link rel="stylesheet" href="../static/listings.css">
-<div style="display:flex; flex-direction: row; width: auto; height: 93.9vh; margin: 0; padding: 0; box-sizing: border-box;">
-    
-    <div style = "width: 20%">
-        <h2 style = "display: flex; justify-content: center; text-align: center; padding: .25rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 3rem 1.5rem 3rem; color: rgb(208, 209, 209);">Your Profile</h2>
-        <div class="container" style="display: flex; align-items: center; justify-content: center;">
-            <img style = "border-radius: 50%; width: 300px; height:300px; object-fit: fill;" src="https://sadanduseless.b-cdn.net/wp-content/uploads/2019/05/funny-corgi-butts2.jpg">
+<div class = "maincontainer">
+
+    <div class = "leftsidebar">
+        <h2 class = "leftsidehead">
+            Your Profile
+        </h2>
+        <div class="profileicon">
+            <img src="https://sadanduseless.b-cdn.net/wp-content/uploads/2019/05/funny-corgi-butts2.jpg">
         </div>
     </div>
 
-    <div style = "display:flex; flex-direction: column; width: 60%; height: 100%">
+    <div class="centercontainer">
         
-        <h2 style = "display: flex; justify-content: center; text-align: center; padding: .25rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 8rem 1.5rem 8rem; color: rgb(208, 209, 209)">
+        <h2 class = "postheading">
             Posts
         </h2>
 
-            <div style = "display: flex; justify-content: center; align-items:center; height: 3rem; margin: 0 0 1rem 0.3rem">
+            <div class = "postcontainer">
                 
-                <h3 style = "display: flex; width: 26rem; height: 2.15rem; align-items: center; border: 1px solid black; border-radius: .3rem; margin: 0;">
-                   <label style = "margin: 0 .5rem 0 1rem; font-size: medium;">
+                <h3 class="filter">
+                   <label>
                         Sort By:
                    </label>
                         <button class = "filterbutton" type = "button">
@@ -33,7 +35,7 @@ Current Listings
                         <button class = "filterbutton" type = "button">
                             Time
                         </button>
-                   <label style = "margin: 0 .5rem 0 4.3rem; font-size: medium;"> 
+                   <label> 
                         View:
                    </label>
                         <button class = "filterbutton" type = "button" >
@@ -44,39 +46,39 @@ Current Listings
                         </button>
                 </h3>
 
-                <div style = "display: flex; justify-content:center; align-items: center; border: 1px solid black; border-radius: 1rem; margin: 0 0 0 2.5rem; width: 7rem; background-color: rgb(109, 172, 16); ">
-                        <a href="/post"><button style = "font-size: large; font-weight: 500; background-color:white; font-size: medium; border: 0; margin: .1rem; padding: .2rem; background-color: transparent;" type = "button">Create a Post!</button></a>
+                <div class="postbutton">
+                        <a href="/post"><button class="createbutton" type = "button">Create a Post!</button></a>
                 </div>
 
             </div>
         
-        <div style = "display: flex; flex-direction: column; flex-grow: 1; border: 2px solid rgb(207, 207, 207); margin: .5rem 1rem .5rem 1rem; border-radius: 5px; overflow:auto;">    
+        <div class = "mainfunc">    
             
             {% for x in row %}
-            <div style = "display: flex; flex-direction: column; margin: .6rem; height: 10rem; border: .5px solid rgb(187, 192, 190); border-radius: 10px; background-color: rgb(240, 240, 240); min-height: 10rem;">
+            <div class="postblock">
                 
-                <div style = "display: flex; justify-content: space-between;">
-                    <div style ="display: flex; justify-content: center; align-items: center; margin: .2rem 0 0 .6rem ; font-size: large; font-weight: 600;">
+                <div class="header">
+                    <div class="username">
                         {{x[3]}}
                     </div>
-                    <div style = "display: flex; justify-content: center; align-items: center;">
+                    <div class="title">
                         {{x[2]}}
                     </div>
-                    <div style = "display:flex; font-size: small; height: 1rem; justify-content: center; align-items: center; margin: .2rem .5rem 0 0">
-                        <div style = "font-weight: 100;">
+                    <div class="date">
+                        <div>
                             Date Posted: {{x[4]}}
                         </div>
                     </div>
                 </div>
 
-                <div style = "display: flex; flex-direction: column; flex-grow: 1;">
-                    <div style = "margin: .7rem .5rem 0 1.5rem;">
+                <div class="description">
+                    <div>
                         {{x[7]}}
                     </div>
                 </div>
 
-                <div style = "display: flex; font-size: small; height: 1rem; justify-content: space-between; align-items: center; margin: 0 .5rem .2rem 0">
-                    <div style = "margin: 0 0 0 .5rem">
+                <div class="bottombar">
+                    <div class = "zipcode">
                         ZIP Code: {{x[5]}}
                     </div>
                     <div>
@@ -92,8 +94,8 @@ Current Listings
     </div>
 
         
-    <div style = "display: flex; flex-direction: column; width: 20%;">
-        <h2 style = "display: flex; justify-content: center; text-align: center; padding: 0rem; border-radius: 1.5rem; background-color: rgb(53, 53, 53); margin: 1.5rem 3rem 1.5rem 3rem; color: rgb(208, 209, 209)"></h2>
+    <div class="futurecontent">
+        
     </div>
     
 </div>

@@ -7,11 +7,11 @@ import mysql.connector
 
 class sqlhost():
     db = mysql.connector.connect(
-    host = 'realdoggydata.ct9fxw3xymn0.us-east-2.rds.amazonaws.com',
+    host = 'doggoserver.mysql.database.azure.com',
     port = '3306',
-    user = 'admin',
-    passwd = 'doggowalk',
-    database = 'UserInfo'
+    user = 'mainadmin',
+    password = '9jznqua4y5T@',
+    database = 'userinfo'
     )
 
 @app.route("/")
@@ -141,8 +141,8 @@ def posting():
         userID = session['userID']
         postalCode = session['postalCode']
 
-        if len(title) < 5 or len(title) > 250:
-            flash("Title must contain maximum 250 characters.")
+        if len(title) < 5 or len(title) > 200:
+            flash("Title must contain maximum 200 characters.")
             return render_template('user_post.html', form=form)
         elif len(description) < 30 or len(description) > 2000:
             #max and min characters
@@ -156,7 +156,7 @@ def posting():
         db.commit()
         flash("Listing posted!")
 
-        return render_template('listings.html', form=form)
+        return redirect('/listings')
 
     return render_template('user_post.html', form=form)
 
@@ -173,10 +173,9 @@ def listings():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute("SELECT * FROM PostInfo")
+    mycursor.execute("SELECT * FROM PostInfo ORDER BY postNum DESC")
 
     row = mycursor.fetchall()
-
     return render_template('listings.html', row = row)
 
 @app.route("/user/<username>", methods=['GET', 'POST'])
@@ -200,4 +199,7 @@ def profile(username):
 def alantest():
     return render_template('alantesting.html')
 
+@app.route("/usertest")
+def profile_test():
+    return render_template("user_profile.html")
 
