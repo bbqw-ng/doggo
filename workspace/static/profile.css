@@ -31,6 +31,10 @@ body{
     flex-direction: row;
 }
 
+#user_info {
+    flex-direction: column;
+}
+
 #user_description{
     word-wrap: break-word;
 }
