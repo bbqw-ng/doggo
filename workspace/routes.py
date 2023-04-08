@@ -4,8 +4,6 @@ from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import validate
 from datetime import datetime
 import mysql.connector
-import urllib3
-
 
 class sqlhost():
     db = mysql.connector.connect(
@@ -19,7 +17,7 @@ class sqlhost():
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('under_construction.html')
+    return render_template('alantesting.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
@@ -38,7 +36,8 @@ def register_page():
         lastName = request.form["lastName"]
         age = request.form["age"]
         postalCode = request.form["postalCode"]
-
+        print(request.method)
+        print(username, email)
 
         if len(username) < 3:
             flash("Username must be at least 3 characters in length")
@@ -72,12 +71,14 @@ def register_page():
         elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
             mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
             existingUser = mycursor.fetchall()
+            print(existingUser)
             if existingUser:
                 flash("This username already exists. Please try again.")
                 return render_template('register.html', form=form)
             mycursor.execute('SELECT * FROM LoginInfo WHERE email = %s', [email])
             existingEmail = mycursor.fetchall()
             if existingEmail:
+                print(existingEmail)
                 flash("This email has already been registered.")
                 return render_template('register.html', form=form)
 
@@ -151,7 +152,7 @@ def posting():
             flash("Please insert a schedule")
             return render_template('user_post.html', form=form)
         
-        mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description) VALUES (%s, %s, %s, %s, %s, %s, %s)', [userID, title, username, schedule, timePosted, postalCode, description])
+        mycursor.execute('INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description, status) VALUES (%s, %s, %s, %s, %s, %s, %s, 0)', [userID, title, username, schedule, timePosted, postalCode, description])
         db.commit()
         flash("Listing posted!")
 
@@ -172,27 +173,35 @@ def listings():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute("SELECT * FROM PostInfo ORDER BY postNum DESC")
+    name = session["username"]
+    mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
 
     row = mycursor.fetchall()
-    return render_template('listings.html', row = row)
+    return render_template('listings.html',username = name, row = row)
 
-@app.route("/users/<username>", methods=['GET', 'POST'])
-def profile(username):
+#User's Profile
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
+    name = session["username"]
+    id = "{:03d}".format(session['userID'])
+    return render_template('user_profile.html', username = name, userID = id ) #takes data from current user sesh
+
+
+#Dyamic Profiles 
+#To access profiles: http://127.0.0.1:5000/profile/[username]
+@app.route("/profile/<username>", methods=['GET', 'POST'])
+def other_profile(username):
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
-
-    url = urllib3.PoolManager()
-    r = url.request
-
-    print(r.data)
-
-    print(url)
-    username = None
-
-    return render_template('user_profile.html', username = username)
-
+    mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
+    existingUser = mycursor.fetchall()
+    filtered_list = [t for t in existingUser if t[1] == username] #makes if list of userID and username iif username matches database
+    print(filtered_list)
+    if len(filtered_list) == 1: #idk what it does but it works
+        return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
+    else: 
+        return render_template("under_construction.html") #if no username exists in database takes you to invalid page
 
 #Test Redirects
 @app.route("/alantest")

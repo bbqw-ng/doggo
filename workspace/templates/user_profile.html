@@ -11,15 +11,17 @@
 {% block content %}
 <div class="user">
     <div class="user_container" id="user_profile">
-        <img id="user_pic" src="{{ url_for('static',filename='dawg.jpg') }}" alt="Profile Picture">  <!-- Insert profile pic -->
-        <div id="user_name"><h1>User Name</h1></div> <!-- Insert name  -->
-        <div id="user_id">@12512324</div> <!-- Insert unique id or maybe delete idk :( -->
+        <img id="user_pic" src="{{ url_for('static',filename='blox.png') }}" alt="Profile Picture">  <!-- Insert profile pic -->
+        <div id="user_info">
+            <div id="user_name"><h1>{{username}}</h1></div> <!-- Insert name  -->
+            <div id="user_id">@{{userID}}</div> <!-- Insert unique id or maybe delete idk :( -->
+        </div>
     </div>
     <div class="user_container" id="user_tabs">
         <div><h5>Description</h5></div> <!--  -->
         <div><h5>Reviews</h5></div> <!-- In progress for CI 103 -->
     </div>
-    <div class="user_container" id="user_description">sussysussy69ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ</div> <!-- Dyanamic or Static text -->
+    <div class="user_container" id="user_description">Hello, everyone!</div> <!-- Dyanamic or Static text -->
     <hr>
     <div class="user_container">
         <img class="dog_pic" src="{{ url_for('static',filename='dog1.jpg') }}" alt="Profile Picture">
