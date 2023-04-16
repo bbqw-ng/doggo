@@ -1,3 +1,7 @@
+body{
+    background-image: linear-gradient(315deg,#BBD6BB, #AEC2B6);
+}
+
 .bold{
     font-weight: bold !important;
     transition:all 50ms ease-in;
@@ -97,12 +101,12 @@
     border-radius: 1rem;
     margin: 0 0 0 2.5rem;
     width: 7rem;
-    background-color: rgb(135, 207, 255)
+    background-color: rgb(177, 214, 199)
 }
 
 .postbutton:hover{
     transition: all 180ms ease-in;
-    background-color: rgb(34, 218, 49);
+    background-color: rgb(133, 221, 180);
 }
 
 .createbutton{
