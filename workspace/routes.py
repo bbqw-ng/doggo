@@ -210,3 +210,7 @@ def alantest():
 def profile_test():
     return render_template("user_profile.html")
 
+@app.route("/nav")
+def mynavbar():
+    return render_template("francisnavbar.html")
+

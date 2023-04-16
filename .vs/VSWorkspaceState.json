@@ -3,8 +3,9 @@
     "",
     "\\temp",
     "\\workspace",
+    "\\workspace\\static",
     "\\workspace\\templates"
   ],
-  "SelectedNode": "\\workspace\\routes.py",
+  "SelectedNode": "\\workspace\\static\\styles.css",
   "PreviewInSolutionExplorer": false
 }
