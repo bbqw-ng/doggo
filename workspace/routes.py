@@ -36,8 +36,6 @@ def register_page():
         lastName = request.form["lastName"]
         age = request.form["age"]
         postalCode = request.form["postalCode"]
-        print(request.method)
-        print(username, email)
 
         if len(username) < 3:
             flash("Username must be at least 3 characters in length")
@@ -211,4 +209,8 @@ def alantest():
 @app.route("/usertest")
 def profile_test():
     return render_template("user_profile.html")
+
+@app.route("/nav")
+def mynavbar():
+    return render_template("francisnavbar.html")
 

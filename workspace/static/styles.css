@@ -1,0 +1,30 @@
+/* Navigation Bar */
+.navbar {
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+.navbar logo {
+    float: left;
+}
+
+/* Navigation Bar Labels */
+.navbar a {
+    float: right;
+    color: #A9A9A9;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Color of labels on hover */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Color of current page label */
+.navbar a.active {
+    color: black;
+}
