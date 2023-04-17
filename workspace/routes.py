@@ -198,7 +198,7 @@ def other_profile(username):
     existingUser = mycursor.fetchall()
     filtered_list = [t for t in existingUser if t[1] == username] #makes if list of userID and username iif username matches database
     print(filtered_list)
-    if len(filtered_list) == 1: #idk what it does but it works
+    if len(filtered_list) == 1: #if there is exactly one user associated with username
         return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
     else: 
         return render_template("under_construction.html") #if no username exists in database takes you to invalid page
