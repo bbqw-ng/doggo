@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\temp",
-    "\\workspace",
-    "\\workspace\\static",
-    "\\workspace\\templates"
+    "\\temp"
   ],
-  "SelectedNode": "\\workspace\\static\\styles.css",
   "PreviewInSolutionExplorer": false
 }

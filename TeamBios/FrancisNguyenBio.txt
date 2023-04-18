@@ -1,4 +1,0 @@
-Hello! My name is Francis Nguyen, I'm a first-year Software Engineering student at Drexel University.
-I am currently learning back-end Python frameworks such as Flask, database management using SQL, along with CSS 
-and UI frameworks on Bootstrap and Vue JS. My teammates and I are cooking up an innovative dog walking website, 
-where users can find other people's profiles and hire other users to walk their own dog.

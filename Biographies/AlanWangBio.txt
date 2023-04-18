@@ -1,0 +1,1 @@
+Hello my name is Alan Wang. I am a 1st year computer science major at Drexel University on a 5 year track. I have previous expirence with Python, Javascript, HTML, and CSS. I am currently working on a project that allows users to schedule dog walkers in their local area.

@@ -1,30 +1,41 @@
-/* Navigation Bar */
-.navbar {
-    background-color: #FFFFFF;
-    overflow: hidden;
+/* Theme of navbar */
+:root {
+    --bg: #ff0000;
+    --bg-accent: #484a4d;
+    --text-color: #000000;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 500ms;
 }
 
-.navbar logo {
-    float: left;
+/* Unordered list */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* Navigation Bar Labels */
-.navbar a {
-    float: right;
-    color: #A9A9A9;
-    text-align: center;
-    padding: 14px 16px;
+/* Links text color */
+a {
+    color: var(--text-color);
     text-decoration: none;
-    font-size: 20px;
 }
 
-/* Color of labels on hover */
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
+
+/* Fixed sizing of navbar */
+.navbar {
+    height: var(--nav-size);
+    background-color: var(--bg);
+    padding: 0 1rem;
+    border-bottom: var(--border)
 }
 
-/* Color of current page label */
-.navbar a.active {
-    color: black;
+
+/* Navbar children starting on right-hand side */
+.navbar-nav {
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
