@@ -214,3 +214,7 @@ def profile_test():
 def mynavbar():
     return render_template("francisnavbar.html")
 
+@app.route("/lv2")
+def lv2():
+    return render_template("testlistings.html")
+
