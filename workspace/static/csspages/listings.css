@@ -1,5 +1,5 @@
-body{
-    background-image: linear-gradient(315deg,#BBD6BB, #AEC2B6);
+.containerbody{
+    background-image: linear-gradient(170deg, rgb(227, 255, 212), rgb(157, 245, 235));
 }
 
 .bold{
@@ -55,7 +55,7 @@ body{
 .centercontainer{
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 65%;
     height: 100%;
 }
 
@@ -75,7 +75,8 @@ body{
     justify-content: center;
     align-items: center;
     height: 3rem;
-    margin: 0 0 1rem 0.3rem;
+    margin: -0.6rem 0 0.25rem 0.3rem;
+    background-color: white;
 }
 
 .filter{
@@ -124,7 +125,7 @@ body{
     flex-direction: column;
     flex-grow: 1;
     border: 2px solid rgb(207,207,207);
-    margin: .5rem 1rem .5rem 1rem;
+    margin: .5rem 1rem .8rem 1rem;
     border-radius: 5px;
     overflow: auto;
 }
@@ -199,5 +200,5 @@ body{
 .futurecontent{
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 15%;
 }
