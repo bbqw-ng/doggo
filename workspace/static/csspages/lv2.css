@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.maincontainer{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    margin: 5rem 0 0 0;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.profilepic{
+    border-radius: 50%;
+    width: 20rem;
+    height: 20rem;
+    border: 1px solid black;
+}
+
+.username{
+    margin: 1.0rem 0 0 0;
+    font-size: 3rem;
+}
+
+.userid{
+    margin: -.2rem 9rem 0 0;
+}
+
+.postbutton{
+    margin: 7rem 0 0 0;
+}
+
+.posts{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    margin: 1.5rem 0 0 0;
+
+}
