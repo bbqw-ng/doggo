@@ -1,5 +1,9 @@
+*{
+    font-family: 'Patua One', cursive;
+}
+
 .containerbody{
-    background-image: linear-gradient(170deg, rgb(227, 255, 212), rgb(157, 245, 235));
+    
 }
 
 .bold{
@@ -28,15 +32,14 @@
     width: 20%;
 }
 
-.leftsidehead{
+.profileUsername{
     display: flex;
     justify-content: center;
     text-align: center;
     padding: .25rem;
     border-radius: 1.5rem;
-    background-color: rgb(53,53,53);
     margin: 1.5rem 3rem 1.5rem 3rem;
-    color: rgb(208,209,209)
+    color: rgb(56, 56, 56)
 }
 
 .profileicon{
@@ -50,6 +53,7 @@
     width: 20rem;
     height: 20rem;
     object-fit: fill;
+    margin: 7rem 0 0 1rem;
 }
 
 .centercontainer{
@@ -100,14 +104,14 @@
     align-items: center;
     border: 1px solid black;
     border-radius: 1rem;
-    margin: 0 0 0 2.5rem;
-    width: 7rem;
-    background-color: rgb(177, 214, 199)
+    margin: 3rem 0 0 8rem;
+    width: 8rem;
+    background-color: rgb(46, 212, 96)
 }
 
 .postbutton:hover{
     transition: all 180ms ease-in;
-    background-color: rgb(133, 221, 180);
+    background-color: rgb(0, 255, 136);
 }
 
 .createbutton{
