@@ -1,18 +1,25 @@
-from flask import render_template, request, session, redirect, flash, Flask
+from flask import render_template, request, session, redirect, flash, Flask, g
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
-from workspace.validators import validate
+from workspace.validators import registerHandling
 from datetime import datetime
+from workspace.databaseinfo import sqlconnector
 import mysql.connector
+from workspace.session import User, Admin
 
-class sqlhost():
-    db = mysql.connector.connect(
-    host = 'doggoserver.mysql.database.azure.com',
-    port = '3306',
-    user = 'mainadmin',
-    password = '9jznqua4y5T@',
-    database = 'userinfo'
-    )
+#TODO
+# Add URL_FOR LINKS
+# GET G.SESSION TO WORK IN JINJA
+
+def checkSession(sessionInstance):
+    if sessionInstance != None:
+        return sessionInstance
+
+@app.before_request
+def before_request():
+    g.session = None
+    #g.db = sqlconnector.db
+    #g.mycursor = g.db.cursor()
 
 @app.route("/")
 @app.route("/home")
@@ -22,10 +29,9 @@ def home_page():
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()
-    db = sqlhost.db
+    db = sqlconnector.db
     db.reconnect()
     mycursor = db.cursor()
-
 
     if request.method == 'POST':
         username = request.form['username']
@@ -37,74 +43,38 @@ def register_page():
         age = request.form["age"]
         postalCode = request.form["postalCode"]
 
-        if len(username) < 3:
-            flash("Username must be at least 3 characters in length")
+        #ERROR HANDLING
+        result = registerHandling(form, mycursor, username, password, passwordConfirm, email, firstName, lastName, age, postalCode)
+        if result == False:
             return render_template('register.html', form=form)
-        elif len(password) < 8:
-            flash("Password must be at least 8 characters in length")
-            return render_template('register.html', form=form)
-        elif password != passwordConfirm:
-            flash("Passwords do not match. Please retry again.")
-            return render_template('register.html', form=form)
-        elif validate(email) == 0:
-            flash("Please enter a valid e-mail")
-            return render_template('register.html', form=form)
-        elif len(firstName) < 1:
-            flash("Please enter a valid name.")
-            return render_template('register.html', form=form)
-        elif len(lastName) < 1:
-            flash("Please enter a valid last name.")
-            return render_template('register.html', form=form)
-        elif age:
-            if age.isdigit() == 0:
-                flash("Please enter a valid age.")
-                return render_template('register.html', form=form)
-            if int(age) < 16:
-                flash("You must be 16 years or older to register. (Please refer to our TOS)")
-                return render_template('register.html', form=form)
-        elif postalCode:
-            if len(postalCode) < 5 or postalCode.isdigit() == 0:
-                flash("Please enter a valid postal code.")
-                return render_template('register.html', form=form)
-        elif request.method == 'POST' and 'username' in request.form and 'email' in request.form:
-            mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
-            existingUser = mycursor.fetchall()
-            print(existingUser)
-            if existingUser:
-                flash("This username already exists. Please try again.")
-                return render_template('register.html', form=form)
-            mycursor.execute('SELECT * FROM LoginInfo WHERE email = %s', [email])
-            existingEmail = mycursor.fetchall()
-            if existingEmail:
-                print(existingEmail)
-                flash("This email has already been registered.")
-                return render_template('register.html', form=form)
-
-        mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, username, age, postalCode])
-        db.commit()
-        flash("Account created!")
-        return redirect('/register')
+        #END ERROR HANDLING
+        else:
+            mycursor.execute('INSERT INTO LoginInfo(email, password, firstName, lastName, username, age, postalCode) VALUES (%s, %s, %s, %s, %s, %s, %s)', [email, password, firstName, lastName, username, age, postalCode])
+            db.commit()
+            flash("Account created!")
+            return redirect('/login')
 
     return render_template('register.html', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()
-    db = sqlhost.db
+    db = sqlconnector.db
     db.reconnect()
     mycursor = db.cursor(buffered=True)
+    sessionInstance = None
+
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s and password = %s', [username, password])
         account = mycursor.fetchone()
         if account:
-            session['loggedin'] = True
-            session['username'] = account[5]
-            session['userID'] = account[0]
-            session['postalCode'] = account[7]
+            g.session = User(account)
+            print(g.session)
             flash("Logged in!")
-            return redirect('/login')
+            #_________________________________________________________________________________________
+            return redirect('/profile')
         else:
             flash("Incorrect username or password. Please retry.")
             return redirect('/login')
@@ -114,17 +84,14 @@ def login_page():
 @app.route("/logout")
 
 def logout_btn():
-    session.pop('loggedin', None)
-    session.pop('username', None)
-    session.pop('userID', None)
-    session.pop('postalCode', None)
+    g.session.logout()
     flash("Logged out.")
     return redirect('/login')
-
+#___________________________________________________________________________________________________
 @app.route("/post", methods=['GET', 'POST'])
 def posting():
     form = PostForm()
-    db = sqlhost.db
+    db = sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
 
@@ -168,7 +135,7 @@ def posting():
 
 @app.route("/listings", methods=['GET', 'POST'])
 def listings():
-    db = sqlhost.db
+    db = sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     #takes the session username and sends it to the render_template for later use
@@ -185,16 +152,14 @@ def listings():
 #User's Profile
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
-    name = session["username"]
-    id = "{:03d}".format(session['userID'])
-    return render_template('user_profile.html', username = name, userID = id ) #takes data from current user sesh
+    return render_template('user_profile.html') #takes data from current user sesh
 
 
 #Dyamic Profiles 
 #To access profiles: http://127.0.0.1:5000/profile/[username]
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def other_profile(username):
-    db = sqlhost.db
+    db = sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
@@ -219,7 +184,4 @@ def profile_test():
 def mynavbar():
     return render_template("francisnavbar.html")
 
-@app.route("/lv2")
-def lv2():
-    return render_template("testlistings.html")
 
