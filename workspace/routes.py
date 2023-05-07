@@ -171,11 +171,16 @@ def listings():
     db = sqlhost.db
     mycursor = db.cursor()
     db.reconnect()
+    #takes the session username and sends it to the render_template for later use
     name = session["username"]
+    #takes the postalcode and sends it to the template for use on page
+    postalCode = session["postalCode"]
+    #grabs all the sql entries that arent completed 'indicated by status = 0' and a
+    #also their postnumber in descending order () from latest to oldest
     mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
 
     row = mycursor.fetchall()
-    return render_template('listings.html',username = name, row = row)
+    return render_template('listings.html',username = name, row = row, postalCode = postalCode)
 
 #User's Profile
 @app.route("/profile", methods=['GET', 'POST'])

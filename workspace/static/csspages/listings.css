@@ -1,9 +1,17 @@
 *{
     font-family: 'Patua One', cursive;
+    animation: fadeIn ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
-.containerbody{
-    
+@keyframes fadeIn{
+    0% {
+        opacity: .3;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .bold{
@@ -26,6 +34,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: rgb(255, 255, 255, 0.849);
 }
 
 .leftsidebar{
@@ -42,6 +51,11 @@
     color: rgb(56, 56, 56)
 }
 
+.profileZipcode{
+    font-size: .8rem;
+    margin: -1rem 0 0 8rem;
+}
+
 .profileicon{
     display: flex;
     align-items: center;
@@ -53,13 +67,13 @@
     width: 20rem;
     height: 20rem;
     object-fit: fill;
-    margin: 7rem 0 0 1rem;
+    margin: 8.1rem 0 0 1rem;
 }
 
 .centercontainer{
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 80%;
     height: 100%;
 }
 
@@ -69,13 +83,15 @@
     text-align: center;
     padding: .25rem;
     border-radius: 1.5rem;
-    background-color: rgb(53,53,53);
-    margin: 1.5rem 8rem 1.5rem 8rem;
-    color: rgb(208,209,209)
+    width: 50rem;
+    background-color: rgb(218, 218, 218);
+    margin: 1.5rem 8rem 1.5rem 23rem;
+    color: rgb(70, 70, 70)
 }
 
 .postcontainer{
     display:flex;
+    width: 40rem;
     justify-content: center;
     align-items: center;
     height: 3rem;
@@ -90,7 +106,8 @@
     align-items: center;
     border: 1px solid black;
     border-radius: .3rem;
-    margin: 0;
+    margin: 0 10rem 0 10rem;
+    flex-wrap: wrap;
 }
 
 .filter > label{
@@ -98,13 +115,17 @@
     font-size: medium;
 }
 
+.filterbutton{
+    margin: 0 0 0 .3rem
+}
+
 .postbutton{
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    border-radius: 1rem;
-    margin: 3rem 0 0 8rem;
+    border-radius: .4rem;
+    margin: 1rem 0 0 8rem;
     width: 8rem;
     background-color: rgb(46, 212, 96)
 }
@@ -128,9 +149,10 @@
     display:flex;
     flex-direction: column;
     flex-grow: 1;
-    border: 2px solid rgb(207,207,207);
+    border: 2px solid rgb(209, 209, 209);
     margin: .5rem 1rem .8rem 1rem;
     border-radius: 5px;
+    background-color: rgb(245, 245, 245);
     overflow: auto;
 }
 
@@ -140,9 +162,9 @@
     margin: .6rem;
     height: 10rem;
     border: .5px solid rgb(187,192,190);
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: rgb(240,240,240);
-    min-height: 10rem;
+    min-height: 8.5rem;
 }
 
 .header{
@@ -201,8 +223,3 @@
     margin: 0 0 0 .5rem;
 }
 
-.futurecontent{
-    display: flex;
-    flex-direction: column;
-    width: 15%;
-}

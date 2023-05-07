@@ -11,12 +11,15 @@ Current Listings
 
     <div class = "leftsidebar">
         <div class="profileicon">
-            <img src="../static/pictures/rock-frog.jpg">
+            <img src="../static/pictures/funnydoggo.jpg">
         </div>
         <h2 class = "profileUsername">
             {{username}}
         </h2>
-                    include bio maybe?
+        <h5 class = "profileZipcode">
+            My ZIP Code: {{postalCode}}
+        </h5>
+        
         <div class="postbutton">
             <a href="/post"><button class="createbutton" type = "button">Create a Post?</button></a>
         </div>
@@ -25,10 +28,12 @@ Current Listings
     <div class="centercontainer">
         
         <h2 class = "postheading">
-            Posts
+            Available Posts
         </h2>
 
-            <div class = "postcontainer">
+            <!--
+                going to try and change the filter area!!!!!!!!!
+                <div class = "postcontainer">
                 
                 <h3 class="filter">
                    <label>
@@ -51,6 +56,7 @@ Current Listings
                         </button>
                 </h3>
             </div>
+        -->
         
         <div class = "mainfunc">    
             
@@ -93,15 +99,6 @@ Current Listings
 
     </div>
 
-        
-    <div class="futurecontent">
-        Need help figuring out how to post? Click here: *insert link 
-        /
-        Or this could be an ad or something
-        /
-        Or this could be an expanded posts box which then I could also optimize and create a more post box area
-    </div>
-    
 </div>
 </body>
 <script src="../static/jsfiles/test.js"></script>
