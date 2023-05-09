@@ -7,6 +7,10 @@ from workspace.databaseinfo import sqlconnector
 import mysql.connector
 from workspace.session import UserMixin
 from flask_login import LoginManager, UserMixin
+import pyrebase
+import tempfile
+
+#from api_photos_testing.image_test import storage
 
 #TODO
 # Add URL_FOR LINKS
@@ -195,3 +199,33 @@ def mynavbar():
     return render_template("francisnavbar.html")
 
 
+#photos testing
+
+config = {
+    "apiKey": "AIzaSyDGuhNWHM0fqG1LUHI9FWUMRj8fIRBVTYw",
+    "authDomain": "doggo-11f55.firebaseapp.com",
+    "projectId": "doggo-11f55",
+    "storageBucket": "doggo-11f55.appspot.com",
+    "messagingSenderId": "1013988505400",
+    "appId": "1:1013988505400:web:63b457e6d2536526c033cd",
+    "measurementId": "G-YCSP4C5BG1",
+    "serviceAccount" : "api_photos_testing/serviceAccount.json",
+    "databaseURL" : "https://doggo-11f55-default-rtdb.firebaseio.com/"
+}
+
+firebase = pyrebase.initialize_app(config)
+
+# Access the storage bucket
+storage = firebase.storage()
+
+
+@app.route("/phototest", methods=['GET','POST'])
+def phototest():
+    if request.method == 'POST':
+        if request.method == 'POST':
+            file = request.files['image']
+            temp = tempfile.NamedTemporaryFile(delete=False)
+            file.save(temp.name)
+            storage.child("images/" + file.filename).put(temp.name)
+            return "File uploaded successfully."
+    return render_template("phototest.html")
