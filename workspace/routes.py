@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect, flash, Flask, g
+from flask import render_template, request, session, redirect, flash, Flask, url_for
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import registerHandling
@@ -62,12 +62,13 @@ def login_page():
         print(account)
         if account:
             session['username'] = account[5]
+            username = session['username']
             session['userID'] = account[0]
             session['active'] = True
             session['postalCode'] = account[7]
             flash("Logged in!")
-            #_________________________________________________________________________________________
-            return redirect('/profile')
+
+            return redirect(url_for('profile', username=username ))
         else:
             flash("Incorrect username or password. Please retry.")
             return redirect('/login')
@@ -75,14 +76,11 @@ def login_page():
     return render_template('login.html', form=form)
 
 @app.route("/logout")
-
 def logout_btn():
-    session.pop('username', None)
-    session.pop('postalCode', None)
-    session.pop('active', None)
-    session.pop('userID', None)
+    #Clear user session
+    session.clear()
     flash("Logged out.")
-    return redirect('/login')
+    return redirect(url_for('login_page'))
 #___________________________________________________________________________________________________
 @app.route("/post", methods=['GET', 'POST'])
 def posting():
@@ -146,8 +144,24 @@ def listings():
     return render_template('listings.html',username = name, row = row, postalCode = postalCode)
 
 #User's Profile
-@app.route("/profile", methods=['GET', 'POST'])
-def profile():
+@app.route("/profile/<username>", methods=['GET', 'POST'])
+def profile(username):
+    db = sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
+    #Find the username in database
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
+    try:
+        accountInfo = mycursor.fetchall()[0]
+        # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
+        #Load data into variables to put into HTML
+        username = accountInfo[5]
+        userID = accountInfo[0]
+        
+
+    except:
+        return 'User not found', 404
+    
     return render_template('user_profile.html')
 
 
