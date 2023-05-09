@@ -36,7 +36,7 @@
             </ul>
 
             <ul class="navbar-nav">
-                {% if g.session == None %}
+                {% if session['active'] != True %}
                 <li class="nav-item">
                     <a class="nav-link" href="login">Login</a>
                 </li>
@@ -44,7 +44,7 @@
                     <a class="nav-link" href="register">Register</a>
                 </li>
                 {% endif %}
-                {% if isInstance(g.session, User) == True %}
+                {% if session['active'] == True %}
                 <li id = "posting" class="nav-item">
                     <a class="nav-link" href="listings">Listings</a>
                 </li>
@@ -52,7 +52,7 @@
             </ul>
 
             <ul class = "navbar-nav ms-auto float-right">
-                {% if isInstance(g.session, User) == True %}
+                {% if session['active'] == True %}
                 <li class="d-flex justify-content-end nav-item" style=>
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>

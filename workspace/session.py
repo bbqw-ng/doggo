@@ -1,4 +1,6 @@
-class User():
+from flask_login import UserMixin
+
+class User(UserMixin):
     #Constructors
     def __init__(self, account):
         self.__userID = account[0]
@@ -8,10 +10,10 @@ class User():
     
     #Setters/Getters
     def getUserID(self):
-        return self.__userID
+        return int(self.__userID)
     
     def getUsername(self):
-        return self.__username
+        return str(self.__username)
     
     def getLoginStatus(self):
         return self.__isLoggedIn

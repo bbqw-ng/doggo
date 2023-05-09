@@ -5,21 +5,12 @@ from workspace.validators import registerHandling
 from datetime import datetime
 from workspace.databaseinfo import sqlconnector
 import mysql.connector
-from workspace.session import User, Admin
+from workspace.session import UserMixin
+from flask_login import LoginManager, UserMixin
 
 #TODO
 # Add URL_FOR LINKS
 # GET G.SESSION TO WORK IN JINJA
-
-def checkSession(sessionInstance):
-    if sessionInstance != None:
-        return sessionInstance
-
-@app.before_request
-def before_request():
-    g.session = None
-    #g.db = sqlconnector.db
-    #g.mycursor = g.db.cursor()
 
 @app.route("/")
 @app.route("/home")
@@ -62,16 +53,17 @@ def login_page():
     db = sqlconnector.db
     db.reconnect()
     mycursor = db.cursor(buffered=True)
-    sessionInstance = None
 
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s and password = %s', [username, password])
         account = mycursor.fetchone()
+        print(account)
         if account:
-            g.session = User(account)
-            print(g.session)
+            session['username'] = account[5]
+            session['active'] = True
+            session['postalCode'] = account[7]
             flash("Logged in!")
             #_________________________________________________________________________________________
             return redirect('/profile')
@@ -84,7 +76,9 @@ def login_page():
 @app.route("/logout")
 
 def logout_btn():
-    g.session.logout()
+    session.pop('username', None)
+    session.pop('postalCode', None)
+    session.pop('active', None)
     flash("Logged out.")
     return redirect('/login')
 #___________________________________________________________________________________________________
@@ -139,9 +133,9 @@ def listings():
     mycursor = db.cursor()
     db.reconnect()
     #takes the session username and sends it to the render_template for later use
-    name = session["username"]
+    name = session['username']
     #takes the postalcode and sends it to the template for use on page
-    postalCode = session["postalCode"]
+    postalCode = session['postalCode']
     #grabs all the sql entries that arent completed 'indicated by status = 0' and a
     #also their postnumber in descending order () from latest to oldest
     mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
@@ -152,7 +146,7 @@ def listings():
 #User's Profile
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
-    return render_template('user_profile.html') #takes data from current user sesh
+    return render_template('user_profile.html')
 
 
 #Dyamic Profiles 
