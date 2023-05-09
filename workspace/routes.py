@@ -62,6 +62,7 @@ def login_page():
         print(account)
         if account:
             session['username'] = account[5]
+            session['userID'] = account[0]
             session['active'] = True
             session['postalCode'] = account[7]
             flash("Logged in!")
@@ -79,6 +80,7 @@ def logout_btn():
     session.pop('username', None)
     session.pop('postalCode', None)
     session.pop('active', None)
+    session.pop('userID', None)
     flash("Logged out.")
     return redirect('/login')
 #___________________________________________________________________________________________________
