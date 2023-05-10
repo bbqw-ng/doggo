@@ -1,0 +1,4 @@
+To install the libraries required for firebase to work with flask you need to....
+pip install pyrebase5
+pip uninstall requests-toolbelt  <---- Issue with compatiblity need to install older version
+pip install requests-toolbelt==0.9.1
