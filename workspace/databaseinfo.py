@@ -1,6 +1,6 @@
 import mysql.connector
 
-class sqlconnector:
+class Sqlconnector:
     db = mysql.connector.connect(
     host = 'doggoserver.mysql.database.azure.com',
     port = '3306',

@@ -3,7 +3,7 @@ from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import registerHandling
 from datetime import datetime
-from workspace.databaseinfo import sqlconnector
+from workspace.databaseinfo import Sqlconnector
 import mysql.connector
 from workspace.session import UserMixin
 from flask_login import LoginManager, UserMixin
@@ -24,7 +24,7 @@ def home_page():
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()
-    db = sqlconnector.db
+    db = Sqlconnector.db
     db.reconnect()
     mycursor = db.cursor()
 
@@ -54,7 +54,7 @@ def register_page():
 @app.route("/login", methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()
-    db = sqlconnector.db
+    db = Sqlconnector.db
     db.reconnect()
     mycursor = db.cursor(buffered=True)
 
@@ -89,7 +89,7 @@ def logout_btn():
 @app.route("/post", methods=['GET', 'POST'])
 def posting():
     form = PostForm()
-    db = sqlconnector.db
+    db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
 
@@ -133,7 +133,7 @@ def posting():
 
 @app.route("/listings", methods=['GET', 'POST'])
 def listings():
-    db = sqlconnector.db
+    db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     #takes the session username and sends it to the render_template for later use
@@ -150,7 +150,7 @@ def listings():
 #User's Profile
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
-    db = sqlconnector.db
+    db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
@@ -173,7 +173,7 @@ def profile(username):
 #To access profiles: http://127.0.0.1:5000/profile/[username]
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def other_profile(username):
-    db = sqlconnector.db
+    db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
