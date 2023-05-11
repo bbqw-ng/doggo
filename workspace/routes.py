@@ -186,6 +186,10 @@ def other_profile(username):
         return render_template("under_construction.html") #if no username exists in database takes you to invalid page
 
 #Test Redirects
+@app.route("/logintest")
+def logintest():
+    return render_template('logintesting.html')
+
 @app.route("/alantest")
 def alantest():
     return render_template('alantesting.html')
@@ -198,7 +202,22 @@ def profile_test():
 def mynavbar():
     return render_template("francisnavbar.html")
 
-
+@app.route("/btest", methods=['GET', 'POST'])
+def filter():
+    if request.method == 'POST':
+        filter_option = request.form.get('filter')
+        # Process the filter_option and retrieve filtered results
+        
+        # For example, you can simulate filtering a list of items
+        # based on the selected option
+        all_results = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+        filtered_results = "hi"
+        #[result for result in all_results if result.endswith(filter_option)]
+        
+        return render_template('briantestfilter.html', filtered_results=filtered_results)
+    else:
+        return render_template('briantestfilter.html', filtered_results=[])
+    
 #photos testing
 
 @app.route("/phototest", methods=['GET','POST'])
