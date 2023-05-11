@@ -1,4 +1,6 @@
 To install the libraries required for firebase to work with flask you need to....
-pip install pyrebase5
+pip install pyrebase5 or pyrebase4 <--- really weird
 pip uninstall requests-toolbelt  <---- Issue with compatiblity need to install older version
 pip install requests-toolbelt==0.9.1
+
+https://stackoverflow.com/questions/54302951/convert-application-octet-stream-to-image-jpeg-png-in-flutter/54303172#54303172
