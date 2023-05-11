@@ -186,6 +186,10 @@ def other_profile(username):
         return render_template("under_construction.html") #if no username exists in database takes you to invalid page
 
 #Test Redirects
+@app.route("/logintest")
+def logintest():
+    return render_template('logintesting.html')
+
 @app.route("/alantest")
 def alantest():
     return render_template('alantesting.html')
