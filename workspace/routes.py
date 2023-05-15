@@ -8,9 +8,8 @@ import mysql.connector
 from workspace.session import UserMixin
 from flask_login import LoginManager, UserMixin
 import pyrebase
-import tempfile
 
-#from api_photos_testing.image_test import storage
+from api_photos_testing.image_test import storage
 
 #TODO
 # Add URL_FOR LINKS
@@ -147,26 +146,27 @@ def listings():
     row = mycursor.fetchall()
     return render_template('listings.html',username = name, row = row, postalCode = postalCode)
 
+
 #User's Profile
-@app.route("/profile/<username>", methods=['GET', 'POST'])
-def profile(username):
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
     db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
-    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
+    name = session["username"]
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
     try:
         accountInfo = mycursor.fetchall()[0]
+        print(accountInfo)
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
         #Load data into variables to put into HTML
         username = accountInfo[5]
         userID = accountInfo[0]
-        
-
+        print(username, userID)
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
     except:
         return 'User not found', 404
-    
-    return render_template('user_profile.html')
 
 
 #Dyamic Profiles 
@@ -176,14 +176,18 @@ def other_profile(username):
     db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
-    existingUser = mycursor.fetchall()
-    filtered_list = [t for t in existingUser if t[1] == username] #makes if list of userID and username iif username matches database
-    print(filtered_list)
-    if len(filtered_list) == 1: #if there is exactly one user associated with username
-        return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
-    else: 
-        return render_template("under_construction.html") #if no username exists in database takes you to invalid page
+    #Find the username in database
+    try:
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [username])
+        accountInfo = mycursor.fetchall()[0]
+        # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
+        #Load data into variables to put into HTML
+        username = accountInfo[5]
+        userID = accountInfo[0]
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
+    except:
+        return 'User not found', 404 
+    
 
 #Test Redirects
 @app.route("/logintest")
@@ -217,34 +221,20 @@ def filter():
         return render_template('briantestfilter.html', filtered_results=filtered_results)
     else:
         return render_template('briantestfilter.html', filtered_results=[])
-    
+
+
 #photos testing
-
-config = {
-    "apiKey": "AIzaSyDGuhNWHM0fqG1LUHI9FWUMRj8fIRBVTYw",
-    "authDomain": "doggo-11f55.firebaseapp.com",
-    "projectId": "doggo-11f55",
-    "storageBucket": "doggo-11f55.appspot.com",
-    "messagingSenderId": "1013988505400",
-    "appId": "1:1013988505400:web:63b457e6d2536526c033cd",
-    "measurementId": "G-YCSP4C5BG1",
-    "serviceAccount" : "api_photos_testing/serviceAccount.json",
-    "databaseURL" : "https://doggo-11f55-default-rtdb.firebaseio.com/"
-}
-
-firebase = pyrebase.initialize_app(config)
-
-# Access the storage bucket
-storage = firebase.storage()
-
-
 @app.route("/phototest", methods=['GET','POST'])
 def phototest():
     if request.method == 'POST':
-        if request.method == 'POST':
-            file = request.files['image']
-            temp = tempfile.NamedTemporaryFile(delete=False)
-            file.save(temp.name)
-            storage.child("images/" + file.filename).put(temp.name)
-            return "File uploaded successfully."
+        file = request.files['image']
+
+    # Upload the file to Firebase storage
+        storage.child("images/"+ file.filename).put(file)
+
+        # Get the public URL of the uploaded file
+        url = storage.child("images/" + file.filename).get_url(None)
+
+        # Return the URL to the client
+        return url
     return render_template("phototest.html")

@@ -1,4 +1,6 @@
 import pyrebase
+import requests
+from io import BytesIO
 
 config = {
     "apiKey": "AIzaSyDGuhNWHM0fqG1LUHI9FWUMRj8fIRBVTYw",
@@ -20,6 +22,3 @@ storage = firebase.storage()
 # Upload the image to the bucket
 storage.child("images/image.jpg").put("api_photos_testing/image.jpg")
 
-#uninstall toolbelt and install toolbelt version 0.9.1 
-#pip uninstall requests-toolbelt
-#pip install requests-toolbelt==0.9.1

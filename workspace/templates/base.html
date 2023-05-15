@@ -31,22 +31,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only"></span></a>
+                    <a class="nav-link" href="/home">Home <span class="sr-only"></span></a>
                 </li>
             </ul>
 
             <ul class="navbar-nav">
                 {% if session['active'] != True %}
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="register">Register</a>
+                    <a class="nav-link" href="/register">Register</a>
                 </li>
                 {% endif %}
                 {% if session['active'] == True %}
                 <li id = "posting" class="nav-item">
-                    <a class="nav-link" href="listings">Listings</a>
+                    <a class="nav-link" href="/listings">Listings</a>
                 </li>
                 {% endif %}
             </ul>
@@ -54,10 +54,10 @@
             <ul class = "navbar-nav ms-auto float-right">
                 {% if session['active'] == True %}
                 <li class="d-flex justify-content-end nav-item" style=>
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/profile/bbqw_ng">Profile</a>
                 </li>
                 <li class="d-flex justify-content-end nav-item" style="padding: 0 .5rem 0 .3rem">
-                    <a class="nav-link" href="logout">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
                 {% endif %}
             </ul>
