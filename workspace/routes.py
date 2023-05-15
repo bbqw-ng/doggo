@@ -146,8 +146,8 @@ def listings():
     row = mycursor.fetchall()
     return render_template('listings.html',username = name, row = row, postalCode = postalCode)
 
+
 #User's Profile
-#need to get user session information
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
     db = Sqlconnector.db
@@ -167,8 +167,6 @@ def profile():
         return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
     except:
         return 'User not found', 404
-    
-    
 
 
 #Dyamic Profiles 
@@ -178,14 +176,18 @@ def other_profile(username):
     db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
-    mycursor.execute('SELECT userID, username FROM LoginInfo') #retrieves userID and username from database
-    existingUser = mycursor.fetchall()
-    filtered_list = [t for t in existingUser if t[1] == username] #makes if list of userID and username iif username matches database
-    print(filtered_list)
-    if len(filtered_list) == 1: #if there is exactly one user associated with username
-        return render_template('user_profile.html', username = filtered_list[0][1], userID = "{:03d}".format(filtered_list[0][0]))
-    else: 
-        return render_template("under_construction.html") #if no username exists in database takes you to invalid page
+    #Find the username in database
+    try:
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [username])
+        accountInfo = mycursor.fetchall()[0]
+        # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
+        #Load data into variables to put into HTML
+        username = accountInfo[5]
+        userID = accountInfo[0]
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
+    except:
+        return 'User not found', 404 
+    
 
 #Test Redirects
 @app.route("/logintest")
