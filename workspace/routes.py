@@ -8,7 +8,6 @@ import mysql.connector
 from workspace.session import UserMixin
 from flask_login import LoginManager, UserMixin
 import pyrebase
-import tempfile
 
 from api_photos_testing.image_test import storage
 
@@ -148,6 +147,7 @@ def listings():
     return render_template('listings.html',username = name, row = row, postalCode = postalCode)
 
 #User's Profile
+#need to get user session information
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     db = Sqlconnector.db
@@ -217,16 +217,20 @@ def filter():
         return render_template('briantestfilter.html', filtered_results=filtered_results)
     else:
         return render_template('briantestfilter.html', filtered_results=[])
-    
-#photos testing
 
+
+#photos testing
 @app.route("/phototest", methods=['GET','POST'])
 def phototest():
     if request.method == 'POST':
-        if request.method == 'POST':
-            file = request.files['image']
-            temp = tempfile.NamedTemporaryFile(delete=False)
-            file.save(temp.name)
-            storage.child("images/" + file.filename).put(temp.name)
-            return "File uploaded successfully."
+        file = request.files['image']
+
+    # Upload the file to Firebase storage
+        storage.child("images/"+ file.filename).put(file)
+
+        # Get the public URL of the uploaded file
+        url = storage.child("images/" + file.filename).get_url(None)
+
+        # Return the URL to the client
+        return url
     return render_template("phototest.html")

@@ -1,12 +1,14 @@
 from flask_login import UserMixin
 
 class User(UserMixin):
+    __uniqueID = 00000000
     #Constructors
     def __init__(self, account):
         self.__userID = account[0]
         self.__username = account[5]
         self.__isLoggedIn = True
-        #self.__profilePicture = profilePicture
+        self.__profilePicture = 'dog2.img'
+        User.__uniqueID += account[0] + 1
     
     #Setters/Getters
     def getUserID(self):
@@ -27,8 +29,7 @@ class User(UserMixin):
         
 
 #Admin Class
-class Admin(User):
-    
+class Admin(User):    
     def __init__(self, account):
         super().__init__(account)
         
