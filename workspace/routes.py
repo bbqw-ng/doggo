@@ -58,10 +58,10 @@ def login_page():
     db.reconnect()
     mycursor = db.cursor(buffered=True)
 
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        username = request.form['username']
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
         password = request.form['password']
-        mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s and password = %s', [username, password])
+        mycursor.execute('SELECT * FROM LoginInfo WHERE email = %s and password = %s', [email, password])
         account = mycursor.fetchone()
         print(account)
         if account:
@@ -77,7 +77,7 @@ def login_page():
             flash("Incorrect username or password. Please retry.")
             return redirect('/login')
 
-    return render_template('login.html', form=form)
+    return render_template('logintesting.html', form=form)
 
 @app.route("/logout")
 def logout_btn():

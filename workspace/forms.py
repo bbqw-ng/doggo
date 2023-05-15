@@ -15,6 +15,7 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(label='Username')
+    email = StringField(label="Email")
     password = PasswordField(label='Password')
 
 class PostForm(FlaskForm):
