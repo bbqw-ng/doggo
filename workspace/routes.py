@@ -154,9 +154,9 @@ def profile():
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
-    name = session["username"]
-    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
     try:
+        name = session["username"]
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
         accountInfo = mycursor.fetchall()[0]
         print(accountInfo)
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
@@ -166,7 +166,7 @@ def profile():
         print(username, userID)
         return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
     except:
-        return 'User not found', 404
+        return login_page()
 
 
 #Dyamic Profiles 
