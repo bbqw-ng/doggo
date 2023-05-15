@@ -148,25 +148,27 @@ def listings():
 
 #User's Profile
 #need to get user session information
-@app.route("/profile/<username>", methods=['GET', 'POST'])
-def profile(username):
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
     db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
-    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [username])
+    name = session["username"]
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
     try:
         accountInfo = mycursor.fetchall()[0]
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
         #Load data into variables to put into HTML
         username = accountInfo[5]
         userID = accountInfo[0]
-        
+        print(username, userID)
+        return(userID)
 
     except:
         return 'User not found', 404
     
-    return render_template('user_profile.html')
+    return render_template('user_profile.html', username = username, userID = userID)
 
 
 #Dyamic Profiles 
