@@ -163,8 +163,9 @@ def profile():
         #Load data into variables to put into HTML
         username = accountInfo[5]
         userID = accountInfo[0]
+        profilePic = accountInfo[8]
         print(username, userID)
-        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic)
     except:
         return login_page()
 
@@ -226,15 +227,28 @@ def filter():
 #photos testing
 @app.route("/phototest", methods=['GET','POST'])
 def phototest():
+    db = Sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
+    
+    # try:
+    name = session["username"]
     if request.method == 'POST':
         file = request.files['image']
+        
 
     # Upload the file to Firebase storage
-        storage.child("images/"+ file.filename).put(file)
+        storage.child(name +"/"+ "profilePic").put(file)
 
         # Get the public URL of the uploaded file
-        url = storage.child("images/" + file.filename).get_url(None)
+        url = storage.child(name +"/"+ "profilePic").get_url(None)
 
-        # Return the URL to the client
-        return url
+        #update database with link
+        mycursor.execute('UPDATE LoginInfo SET profilePic = %s WHERE username = %s',[url, name])
+        db.commit()
+        print(mycursor.rowcount, "record(s) affected")
+        
     return render_template("phototest.html")
+    
+    # except:
+    #     return login_page()
