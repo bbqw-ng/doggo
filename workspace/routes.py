@@ -202,7 +202,7 @@ def other_profile(username):
     
 
 #Test Redirects
-@app.routes("/registertest")
+@app.route("/registertest")
 def registertest():
     return render_template('registertesting.html')
 
