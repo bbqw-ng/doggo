@@ -191,6 +191,10 @@ def other_profile(username):
     
 
 #Test Redirects
+@app.routes("/registertest")
+def registertest():
+    return render_template('registertesting.html')
+
 @app.route("/logintest")
 def logintest():
     return render_template('logintesting.html')
