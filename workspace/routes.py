@@ -196,7 +196,12 @@ def other_profile(username):
         #Load data into variables to put into HTML
         username = accountInfo[5]
         userID = accountInfo[0]
-        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID))
+        profilePic = accountInfo[8]
+        gallery1 = accountInfo[9]
+        gallery2 = accountInfo[10]
+        gallery3 = accountInfo[11]
+        gallery4 = accountInfo[12]
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
     except:
         return 'User not found', 404 
     
