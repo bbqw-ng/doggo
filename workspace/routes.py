@@ -10,6 +10,7 @@ from flask_login import LoginManager, UserMixin
 import pyrebase
 
 from api_photos_testing.image_test import storage
+from workspace.upload import upload_image
 
 #TODO
 # Add URL_FOR LINKS
@@ -71,7 +72,7 @@ def login_page():
             session['postalCode'] = account[7]
             flash("Logged in!")
 
-            return redirect(url_for('profile', username=username ))
+            return redirect(url_for('profile'))
         else:
             flash("Incorrect username or password. Please retry.")
             return redirect('/login')
@@ -132,20 +133,26 @@ def posting():
 
 @app.route("/listings", methods=['GET', 'POST'])
 def listings():
-    db = Sqlconnector.db
-    mycursor = db.cursor()
-    db.reconnect()
-    #takes the session username and sends it to the render_template for later use
-    name = session['username']
-    #takes the postalcode and sends it to the template for use on page
-    postalCode = session['postalCode']
-    #grabs all the sql entries that arent completed 'indicated by status = 0' and a
-    #also their postnumber in descending order () from latest to oldest
-    mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
+    try:
+        db = Sqlconnector.db
+        mycursor = db.cursor()
+        db.reconnect()
+        #takes the session username and sends it to the render_template for later use
+        name = session['username']
+        #takes the postalcode and sends it to the template for use on page
+        postalCode = session['postalCode']
 
-    row = mycursor.fetchall()
-    return render_template('listings.html',username = name, row = row, postalCode = postalCode)
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
+        accountInfo = mycursor.fetchall()[0]
+        profilePic = accountInfo[8]
+        #grabs all the sql entries that arent completed 'indicated by status = 0' and a
+        #also their postnumber in descending order () from latest to oldest
+        mycursor.execute("SELECT * FROM PostInfo WHERE status = 0 ORDER BY postNum DESC")
 
+        row = mycursor.fetchall()
+        return render_template('listings.html',username = name, row = row, postalCode = postalCode, profilePic = profilePic)
+    except: 
+        return login_page()
 
 #User's Profile
 @app.route("/profile", methods=['GET', 'POST'])
@@ -164,8 +171,12 @@ def profile():
         username = accountInfo[5]
         userID = accountInfo[0]
         profilePic = accountInfo[8]
+        gallery1 = accountInfo[9]
+        gallery2 = accountInfo[10]
+        gallery3 = accountInfo[11]
+        gallery4 = accountInfo[12]
         print(username, userID)
-        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic)
+        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
     except:
         return login_page()
 
@@ -231,24 +242,20 @@ def phototest():
     mycursor = db.cursor()
     db.reconnect()
     
-    # try:
     name = session["username"]
-    if request.method == 'POST':
-        file = request.files['image']
-        
-
-    # Upload the file to Firebase storage
-        storage.child(name +"/"+ "profilePic").put(file)
-
-        # Get the public URL of the uploaded file
-        url = storage.child(name +"/"+ "profilePic").get_url(None)
-
-        #update database with link
-        mycursor.execute('UPDATE LoginInfo SET profilePic = %s WHERE username = %s',[url, name])
-        db.commit()
-        print(mycursor.rowcount, "record(s) affected")
-        
-    return render_template("phototest.html")
-    
-    # except:
-    #     return login_page()
+    try:
+        if request.method == 'POST':
+            file = request.files['image']
+            if request.form['Upload'] == 'profilePic':
+                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+            if request.form['Upload'] == 'gallery1':
+                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+            if request.form['Upload'] == 'gallery2':
+                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+            if request.form['Upload'] == 'gallery3':
+                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+            if request.form['Upload'] == 'gallery4':
+                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+        return render_template("phototest.html")
+    except:
+        return login_page()
