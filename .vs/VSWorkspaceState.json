@@ -3,8 +3,12 @@
     "",
     "\\api_photos_testing",
     "\\workspace",
-    "\\workspace\\static"
+    "\\workspace\\static",
+    "\\workspace\\static\\csspages",
+    "\\workspace\\static\\jsfiles",
+    "\\workspace\\static\\pictures",
+    "\\workspace\\templates"
   ],
-  "SelectedNode": "\\workspace\\session.py",
+  "SelectedNode": "\\workspace\\routes.py",
   "PreviewInSolutionExplorer": false
 }

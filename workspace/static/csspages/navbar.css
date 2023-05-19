@@ -55,14 +55,16 @@ a {
     max-width: 100%;
     height: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     /*flexible row - children start at the right-hand side*/
 }
 
 .navbar-logo {
-    max-width: 100%;
-    height: 100%;
-    display: flex;
+    max-width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 20px;
 }
 
 
@@ -72,7 +74,6 @@ a {
     width: calc(var(--nav-size)*0.9);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 /*Icon Button*/
@@ -86,8 +87,7 @@ a {
     padding: 1px;
     margin: 0px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: auto;
 
     user-select: none;
 

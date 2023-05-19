@@ -123,11 +123,8 @@ function createNavbar() {
 
     const navLogoIcon = document.createElement('img');
     navLogoIcon.src = '../static/pictures/doggoLogo.png'
-    navLogoIcon.style.width = 130 + 'px';
-    navLogoIcon.style.height = 130 + 'px';
-    navLogoIcon.style.position = 'relative';
-    navLogoIcon.style.bottom = 17 + 'px';
-    navLogoIcon.style.left = 840 + 'px';
+    navLogoIcon.style.width = 150 + 'px';
+    navLogoIcon.style.height = 150 + 'px';
 
     navLogo.appendChild(navLogoIcon)
 
