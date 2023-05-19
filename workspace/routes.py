@@ -70,6 +70,7 @@ def login_page():
             session['userID'] = account[0]
             session['active'] = True
             session['postalCode'] = account[7]
+            session['profilePic'] = account[8]
             flash("Logged in!")
 
             return redirect(url_for('profile'))

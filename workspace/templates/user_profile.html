@@ -9,7 +9,7 @@
     <div class="user_container" id="user_profile">
         <img id="user_pic" src="{{profilePic}}" alt="Profile Picture">  <!-- Insert profile pic -->
         <script>
-            var profilePic = '{{ profilePic }}'; //Im just passing this variable into javascript :)
+            var profilePic = '{{ session["profilePic"] }}'; //Im just passing this variable into javascript :) (this is the logged-in user's pfp)
         </script>
         <div id="user_info">
             <div id="user_name"><h1>{{username}}</h1></div> <!-- Insert name  -->
