@@ -7,7 +7,7 @@
 
 <div class="user">
     <div class="user_container" id="user_profile">
-        <img id="user_pic" src="../static/pictures/rock-dog.jpeg" alt="Profile Picture">  <!-- Insert profile pic -->
+        <img id="user_pic" src="{{profilePic}}" alt="Profile Picture">  <!-- Insert profile pic -->
         <div id="user_info">
             <div id="user_name"><h1>{{username}}</h1></div> <!-- Insert name  -->
             <div id="user_id">@{{userID}}</div> <!-- Insert unique id or maybe delete idk :( -->
@@ -20,9 +20,10 @@
     <div class="user_container" id="user_description">This is my personal description!</div> <!-- Dyanamic or Static text -->
     <hr>
     <div class="user_container">
-        <img class="dog_pic" src="../static/pictures/dog1.jpg" alt="Profile Picture">
-        <img class="dog_pic" src="../static/pictures/dog2.jpg" alt="Profile Picture">
-        <img class="dog_pic" src="../static/pictures/dog3.jpg" alt="Profile Picture">
+        <img class="dog_pic" src="{{gallery1}}" alt="Gallery Picture">
+        <img class="dog_pic" src="{{gallery2}}" alt="Gallery Picture">
+        <img class="dog_pic" src="{{gallery3}}" alt="Gallery Picture">
+        <img class="dog_pic" src="{{gallery4}}" alt="Gallery Picture">
     </div> <!-- Pick few random photos from static folder -->
 </div>
 

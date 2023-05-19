@@ -4,9 +4,31 @@
     <title>Upload an image</title>
   </head>
   <body>
+    Profile pic
     <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
       <input type="file" name="image">
-      <input type="submit" value="Upload">
+      <input type="submit" name="Upload" value="profilePic" >
     </form>
+    gallery 1
+    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" name="Upload" value="gallery1" >
+    </form>
+    gallery 2
+    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" name="Upload" value="gallery2" >
+    </form>
+    gallery 3
+    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" name="Upload" value="gallery3">
+    </form>
+    gallery 4
+    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" name="Upload" value="gallery4">
+    </form>
+    <img src="" alt="">
   </body>
 </html>
