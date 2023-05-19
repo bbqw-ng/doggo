@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\api_photos_testing",
-    "\\temp",
     "\\workspace",
-    "\\workspace\\static",
-    "\\workspace\\templates"
+    "\\workspace\\static"
   ],
   "SelectedNode": "\\workspace\\session.py",
   "PreviewInSolutionExplorer": false
