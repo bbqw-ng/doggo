@@ -87,7 +87,7 @@ a {
     --button-size: calc(var(--nav-size)*0.75);
     width: var(--button-size);
     height: var(--button-size);
-    background-color: #cae3af;
+    background-color: #000000;
     border-radius: 50%;
     padding: 1px;
     margin: 0px;
@@ -120,7 +120,7 @@ a {
     top: 74px;
     right: 30px;
     width: 250px;
-    background-color: none;
+    background-color: white;
     border: 0.1px solid #d5d4d4;
     border-radius: var(--border-radius);
     padding: 0.3rem;

@@ -8,6 +8,9 @@
 <div class="user">
     <div class="user_container" id="user_profile">
         <img id="user_pic" src="{{profilePic}}" alt="Profile Picture">  <!-- Insert profile pic -->
+        <script>
+            var profilePic = '{{ profilePic }}'; //Im just passing this variable into javascript :)
+        </script>
         <div id="user_info">
             <div id="user_name"><h1>{{username}}</h1></div> <!-- Insert name  -->
             <div id="user_id">@{{userID}}</div> <!-- Insert unique id or maybe delete idk :( -->

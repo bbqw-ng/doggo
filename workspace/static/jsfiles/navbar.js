@@ -6,7 +6,7 @@ function createNavItem(icon, dropdownMenu) {
     iconButton.className = 'icon-button';
 
     const iconImage = document.createElement('img');
-    iconImage.src = 'https://images.pexels.com/photos/3658120/pexels-photo-3658120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+    iconImage.src = profilePic;
     iconButton.appendChild(iconImage);
 
     // Menu doesn't appear initially
@@ -93,7 +93,7 @@ function createDropdownMenu() {
     dropdown.appendChild(hr);
 
     const signOutLink = document.createElement('a');
-    signOutLink.href = '/signout';
+    signOutLink.href = '/logout';
     signOutLink.className = 'menu-item';
 
     const SignOutIcon = document.createElement('img');
@@ -113,14 +113,7 @@ function createNavbar() {
     const navbarList = document.createElement('ul');
     navbarList.className = 'navbar-nav';
 
-    const navbarLogo = document.createElement('div');
-    navbarLogo.className = 'navbar-logo';
-    const logoLink = document.createElement('a');
-    logoLink.href = '/home';
-    logoLink.appendChild(document.createTextNode('DogGo!'));
-    navbarLogo.appendChild(logoLink);
 
-    navbarList.appendChild(navbarLogo);
     navbar.appendChild(navbarList);
 
     const navItem = createNavItem(document.createElement('img'), createDropdownMenu());
