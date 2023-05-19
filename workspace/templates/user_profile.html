@@ -1,14 +1,10 @@
 ﻿<link rel= "stylesheet" type= "text/css" href= "../static/csspages/profile.css">
-{% extends 'base.html' %}
-
-{% block title %}
-
-{{username}}'s Profile
+{% include 'francisnavbar.html' %}
 
 
-{% endblock %}
 
 {% block content %}
+
 <div class="user">
     <div class="user_container" id="user_profile">
         <img id="user_pic" src="../static/pictures/rock-dog.jpeg" alt="Profile Picture">  <!-- Insert profile pic -->
@@ -29,6 +25,5 @@
         <img class="dog_pic" src="../static/pictures/dog3.jpg" alt="Profile Picture">
     </div> <!-- Pick few random photos from static folder -->
 </div>
-
 
 {% endblock %}

@@ -19,12 +19,12 @@
     </title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "width: auto; height: 3vw;">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="width: auto; height: 3vw;">
         <a href="home">
-            <img class = "p-1 ms-2" src="https://thumbs.gfycat.com/AthleticRadiantAcornbarnacle-max-1mb.gif" alt="moving doggo" width="50px" height="50px">
+            <img class="p-1 ms-2" src="https://thumbs.gfycat.com/AthleticRadiantAcornbarnacle-max-1mb.gif" alt="moving doggo" width="50px" height="50px">
         </a>
-        
-        <a class="navbar-brand" style = "padding: 0 1rem 0 1rem; margin: 0;" href="home">Doggo</a>
+
+        <a class="navbar-brand" style="padding: 0 1rem 0 1rem; margin: 0;" href="home">Doggo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,16 +45,16 @@
                 </li>
                 {% endif %}
                 {% if session['active'] == True %}
-                <li id = "posting" class="nav-item">
+                <li id="posting" class="nav-item">
                     <a class="nav-link" href="/listings">Listings</a>
                 </li>
                 {% endif %}
             </ul>
 
-            <ul class = "navbar-nav ms-auto float-right">
+            <ul class="navbar-nav ms-auto float-right">
                 {% if session['active'] == True %}
                 <li class="d-flex justify-content-end nav-item" style=>
-                    <a class="nav-link" href="/profile/bbqw_ng">Profile</a>
+                    <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 <li class="d-flex justify-content-end nav-item" style="padding: 0 .5rem 0 .3rem">
                     <a class="nav-link" href="/logout">Logout</a>
