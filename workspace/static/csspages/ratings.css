@@ -1,0 +1,25 @@
+.star-button {
+  border: 0px;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0 0 0 0;
+}
+
+.checked {
+  color: rgb(255, 222, 72);
+}
+
+.unchecked {
+  color: #D3D3D3;
+}
+
+.ratings .stars {
+  color: #D3D3D3;
+  transition: color 0.2s;
+}
+.ratings .stars:hover {
+  color: rgb(255, 222, 72);
+}
+.ratings .stars:hover ~ .stars {
+  color: rgb(255, 222, 72);
+}/*# sourceMappingURL=ratings.css.map */

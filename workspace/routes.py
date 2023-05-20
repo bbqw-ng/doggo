@@ -269,3 +269,11 @@ def phototest():
         return render_template("phototest.html")
     except:
         return login_page()
+    
+@app.route("/ratings", methods=['GET','POST'])
+def ratings():
+    db = Sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
+    
+    return render_template("ratings.html")
