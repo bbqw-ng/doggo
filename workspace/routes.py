@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect, flash, Flask, url_for
+from flask import render_template, request, session, redirect, flash, Flask, url_for, jsonify
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import registerHandling
@@ -276,4 +276,25 @@ def ratings():
     mycursor = db.cursor()
     db.reconnect()
     
+    #ADD: error handling (comment & rateValue needs to be required)
+    #ADD: average rating value and add to user info
+    try:
+        if request.method == 'POST':
+            username = session['username']
+            comment = request.form['comment']
+            rateValue = session['rateValue']
+            #Once value is stored, return to default
+            session.pop('rateValue', None)
+
+            print(username,comment,rateValue)
+    except:
+        return login_page()
+    
     return render_template("ratings.html")
+
+@app.route('/receive_rating', methods=['POST'])
+def receive_rating():
+    rateValue = request.json['rating']
+    session['rateValue'] = rateValue
+
+    return jsonify({'message': 'Rating received'})

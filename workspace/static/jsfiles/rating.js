@@ -1,3 +1,22 @@
+
+
+function openRate() {
+    const menu = document.getElementById('rateMenu');
+    menu.style.display = 'block';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+
+
+}
+
+function closeRate() {
+    const menu = document.getElementById('rateMenu');
+    menu.style.display = 'none';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
+}
+
+
 const stars = document.querySelectorAll('.star');
 let rating = 0;
 
@@ -26,6 +45,20 @@ stars.forEach((star, index1) => {
 function updateRating(clickedRating) {
     rating = clickedRating;
     console.log(rating);
+
+    // Create an AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/receive_rating', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.message); // Display the response message from Flask
+        }
+    };
+
+    // Send the rating as JSON payload in the request body
+    xhr.send(JSON.stringify({ rating: rating }));
 }
 
 // Function to highlight stars up to a given index
