@@ -1,3 +1,4 @@
+from ssl import ALERT_DESCRIPTION_BAD_CERTIFICATE
 from flask import render_template, request, session, redirect, flash, Flask, url_for, jsonify
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
@@ -278,17 +279,24 @@ def ratings():
     
     #ADD: error handling (comment & rateValue needs to be required)
     #ADD: average rating value and add to user info
-    try:
-        if request.method == 'POST':
-            username = session['username']
-            comment = request.form['comment']
-            rateValue = session['rateValue']
-            #Once value is stored, return to default
-            session.pop('rateValue', None)
 
-            print(username,comment,rateValue)
-    except:
-        return login_page()
+    if request.method == 'POST':
+        username = session['username']
+        comment = request.form['comment']
+
+        try:
+            rateValue = session['rateValue']
+        except:
+            rateValue = None
+
+        if rateValue == None or comment == '':
+            print("Not all requirements fufilled")
+            return render_template("ratings.html")
+                
+        #Once value is stored, return to default
+        session.pop('rateValue', None)
+            
+        print(username,comment,rateValue)
     
     return render_template("ratings.html")
 

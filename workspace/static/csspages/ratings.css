@@ -145,3 +145,13 @@ textarea{
   flex-direction: row;
   justify-content: space-between;
 }
+
+.closeButton {
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+
+.submitButton {
+    cursor: pointer;
+}

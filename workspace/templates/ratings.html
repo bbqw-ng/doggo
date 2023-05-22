@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
@@ -44,12 +45,12 @@
             <h2 class="commentTitle">Comments</h2>
 
             <div>
-                <textarea <input type="text" rows="20" cols="30" name="comment" class="form-control commentBox" id="form.comment" placeholder="Write comments here!" /></textarea>
+                <textarea <input type="text" rows="20" cols="30" name="comment" class="form-control commentBox" id="form.comment" placeholder="Write comments here! (300 word max.)" /></textarea>
             </div>
 
             <div class="buttons">
-            <button class="closeButton buttonBox" onclick="closeRate()" type="button">Cancel</button>
-            <button class="submitButton buttonBox" type="submit">Submit</button>
+                <button class="closeButton buttonBox" onclick="closeRate()" type="button">Cancel</button>
+                <button class="submitButton buttonBox" type="submit">Submit</button>
             </div>
 
         </form>
@@ -58,5 +59,6 @@
     <div class="overlay" onclick="closeRate()" id="overlay"></div>
 
     <script src="static/jsfiles/rating.js"></script>
+
 </body>
 </html>
