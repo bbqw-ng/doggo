@@ -165,7 +165,7 @@ def profile():
     #Find the username in database
     try:
         name = session["username"]
-        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [name])
         accountInfo = mycursor.fetchall()[0]
         print(accountInfo)
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
@@ -306,3 +306,14 @@ def receive_rating():
     session['rateValue'] = rateValue
 
     return jsonify({'message': 'Rating received'})
+
+def calcRating(userID):
+    db = Sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
+    #takes all the ratings that were specific to that user.
+    mycursor.execute('SELECT rating FROM ratinginfo WHERE userID = %s', [userID])
+    #this would sum all the values of the list and divide it by the length of the list to calculate the average (rounded up if >=.5)
+    averageRating = sum(mycursor.fetchall()) // len(mycursor.fetchall())
+    return averageRating
+    
