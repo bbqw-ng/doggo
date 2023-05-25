@@ -78,7 +78,7 @@ def login_page():
             flash("Incorrect username or password. Please retry.")
             return redirect('/login')
 
-    return render_template('logintesting.html', form=form)
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 def logout_btn():
@@ -162,24 +162,28 @@ def profile():
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
-    try:
-        name = session["username"]
-        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
-        accountInfo = mycursor.fetchall()[0]
-        print(accountInfo)
-        # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
-        #Load data into variables to put into HTML
-        username = accountInfo[5]
-        userID = accountInfo[0]
-        profilePic = accountInfo[8]
-        gallery1 = accountInfo[9]
-        gallery2 = accountInfo[10]
-        gallery3 = accountInfo[11]
-        gallery4 = accountInfo[12]
-        print(username, userID)
-        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
-    except:
-        return login_page()
+    # try:
+    name = session["username"]
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
+    accountInfo = mycursor.fetchall()[0]
+    print(accountInfo)
+    # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
+    #Load data into variables to put into HTML
+    userID = accountInfo[0]
+    email = accountInfo[1]
+    name = accountInfo[3] + " " + accountInfo[4]
+    username = accountInfo[5]
+    age = accountInfo [6]
+    postal = accountInfo[7]
+    profilePic = accountInfo[8]
+    gallery1 = accountInfo[9]
+    gallery2 = accountInfo[10]
+    gallery3 = accountInfo[11]
+    gallery4 = accountInfo[12]
+    print(username, userID)
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal)
+# except:
+    #     return login_page()
 
 
 #Dyamic Profiles 
@@ -195,14 +199,18 @@ def other_profile(username):
         accountInfo = mycursor.fetchall()[0]
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
         #Load data into variables to put into HTML
-        username = accountInfo[5]
         userID = accountInfo[0]
+        email = accountInfo[1]
+        name = accountInfo[3] + " " + accountInfo[4]
+        username = accountInfo[5]
+        age = accountInfo [6]
+        postal = accountInfo[7]
         profilePic = accountInfo[8]
         gallery1 = accountInfo[9]
         gallery2 = accountInfo[10]
         gallery3 = accountInfo[11]
         gallery4 = accountInfo[12]
-        return render_template('user_profile.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
+        return render_template('user_profile_test', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
     except:
         return 'User not found', 404 
     
@@ -214,15 +222,11 @@ def registertest():
 
 @app.route("/logintest")
 def logintest():
-    return render_template('logintesting.html')
+    return render_template('login.html')
 
 @app.route("/alantest")
 def alantest():
     return render_template('alantesting.html')
-
-@app.route("/usertest")
-def profile_test():
-    return render_template("user_profile.html")
 
 @app.route("/nav")
 def mynavbar():
@@ -269,3 +273,8 @@ def phototest():
         return render_template("phototest.html")
     except:
         return login_page()
+    
+#user profile test
+@app.route("/usertest", methods=['GET','POST'])
+def usertest():
+    return render_template("user_profile_test.html")

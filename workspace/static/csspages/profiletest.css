@@ -1,0 +1,115 @@
+body{
+    background-color: #F0E0E1;
+}
+
+#main_content{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.row{
+    flex:1;
+    background-color: #EFE7DA;
+    margin:10px;
+    box-shadow: 0 0 4px lightgrey;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+#row1{
+    align-items: center;
+    justify-content: space-between;
+}
+
+#row2{
+    flex-grow: 1.2;
+    flex-direction: column;
+    display: flex;
+}
+
+#profile_pic{
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 8px;
+}
+
+.green_box{
+    background-color: #D1DED4;
+    box-shadow: 0 0 4px lightgrey;
+    margin:20px;
+}
+
+#profile_intro{
+    text-align: center;
+}
+
+#profile_info{
+    width: 70%;
+}
+
+#about_me_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}
+
+#about_me {
+  flex: 1;
+}
+
+#gallery {
+    flex-grow: 2;
+}
+
+#about_me_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#gallery_header {
+
+}
+
+#gallery_photos{
+    display: flex;
+    flex-direction: row;
+}
+
+.gallery_pic {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+}
+
+.col{
+    flex: 1;
+    padding: 10px;
+    background-color: #EFE7DA; /* Use the same background color as the row */
+    margin: 10px;
+    box-shadow: 0 0 4px lightgrey; /* Use the same box shadow as the row */
+}
+
+button{
+    background-color: #CD989E;
+    border: none;
+    box-shadow: 0 0 4px lightgrey;
+}
+
+button:hover {
+    background-color: #A67B80;
+}
+
+#submit_review{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

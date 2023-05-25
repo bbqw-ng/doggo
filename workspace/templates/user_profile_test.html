@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="../static/csspages/profiletest.css" />
+{% include 'francisnavbar.html' %}
+{% block content %}
+<body>
+    <script>var profilePic = '{{session["profilePic"]}}';</script>
+    <div id="main_content" class="content">
+        <div id="row1" class="row">
+            <div id="profile_intro">
+                <img id="profile_pic" src="{{profilePic}}">
+                <div id="name">{{name}}</div>
+                <div id="username">{{username}}</div>
+            </div>
+            <div class="green_box" id="profile_info">
+                <p><b>Age:</b> {{age}}</p>
+                <p><b>Location:</b> {{postal}}</p>
+                <p><b>Email:</b> {{email}}</p>
+                <p><b>Account Created:</b> 12131</p>
+            </div>
+        </div>
+        <div id="row2">
+            <div id="about_me" class="col">
+                <div id="about_me_header">
+                    <h2 class="title">About Me</h2>
+                    <button class="button">EDIT</button>
+                </div>
+                <div id="description">DESCRIPTION</div>
+            </div>
+            <!-- Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_gallery_scroll -->
+            <div id="gallery" class="col">
+                <h2 id="gallery_header">Gallery Photos</h2>
+                <div id="gallery_photos">
+                    <img class="gallery_pic" src="{{gallery1}}">
+                    <img class="gallery_pic" src="{{gallery2}}">
+                </div>
+            </div>
+        </div>
+        <div id="row3" class="row">
+            <div id="ratings_header">
+                <h2 class="title">My Ratings</h2>
+                <div id="star_ratings"></div>
+            </div>
+            <div id="reviews">
+                <p>I LOVE THIS DOG</p>
+                <p>I LOVE THIS BAT</p>
+                <p>I LOVE THIS RAT</p>
+                <p>I LOVE THIS CAT</p>
+            </div>
+            <button class="button" id="submit_review">Write a Review</button>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+

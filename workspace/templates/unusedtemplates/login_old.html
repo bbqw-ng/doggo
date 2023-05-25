@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="login.css"
+<div class="container my-5">
+    <video autoplay loop muted plays-inline id="bg-video">
+        <source src="../static/pictures/corgi.mp4" type="video/mp4">
+    </video>
+    <div class="card" style="max-width: 500px; left: 30%;">
+        <form method="POST" class="form-login">
+            <div class="card-header py-4 px-5 bg-light border-0">
+                <h4 class="mb-0 fw-bold" style="text-align: center
+                ;">Login</h4>
+            </div>
+
+            <div class="col-md-8 px-5">
+                <div class="mb-3">
+                    <label for="username" class="form-label">
+                        Username
+                    </label>
+                    {{form.username(class="form-control", id="username", style="max-width: 450px;")}}
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        Password
+                    </label>
+                    {{form.password(class="form-control", id="password", style="max-width: 450px;")}}
+                </div>
+
+            </div>
+            <div class="card footer text-end py-3 px-5 bg-light border-0">
+                <button type="submit" class="btn btn-primary btn-square" style="max-width: 450px;">Log In</button>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+{% endblock %}
