@@ -24,7 +24,7 @@ body{
 }
 
 #row2{
-    flex-grow: 1.2;
+    flex-grow: 1.1;
     flex-direction: column;
     display: flex;
 }
@@ -81,13 +81,15 @@ body{
 #gallery_photos{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery_pic {
+    width: calc(25% - 20px); /* 25% width to fit four images */
+    height: 200px; /* Adjust height as desired */
     padding: 10px;
-    width: 100%;
-    height: 100%;
-    object-fit:contain;
+    object-fit: cover;
 }
 
 .col{

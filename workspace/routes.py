@@ -172,6 +172,7 @@ def profile():
     userID = accountInfo[0]
     email = accountInfo[1]
     name = accountInfo[3] + " " + accountInfo[4]
+    print(name)
     username = accountInfo[5]
     age = accountInfo [6]
     postal = accountInfo[7]
@@ -181,7 +182,7 @@ def profile():
     gallery3 = accountInfo[11]
     gallery4 = accountInfo[12]
     print(username, userID)
-    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal)
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name)
 # except:
     #     return login_page()
 
@@ -210,7 +211,7 @@ def other_profile(username):
         gallery2 = accountInfo[10]
         gallery3 = accountInfo[11]
         gallery4 = accountInfo[12]
-        return render_template('user_profile_test', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4)
+        return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name)
     except:
         return 'User not found', 404 
     
