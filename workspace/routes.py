@@ -164,7 +164,7 @@ def profile():
     #Find the username in database
     # try:
     name = session["username"]
-    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [name])
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [name])
     accountInfo = mycursor.fetchall()[0]
     print(accountInfo)
     # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode

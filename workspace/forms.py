@@ -23,3 +23,7 @@ class PostForm(FlaskForm):
     description = StringField(label='Description')
     schedule = StringField(label='Schedule')
     #automate date instead, would provide user authenticity, differentiate date posted, and schedule, maybe popout menu for the date
+
+
+class RateForm(FlaskForm):
+    comment = StringField(label='Comment')

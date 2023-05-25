@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="static/csspages/ratings.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>banana</title>
+</head>
+<body>
+    <h1>stars</h1>
+    <p>what will show on the profile page</p>
+    <span class="fa fa-star fa-2x checked" value="1"></span>
+    <span class="fa fa-star fa-2x checked" value="2"></span>
+    <span class="fa fa-star fa-2x unchecked" value="3"></span>
+    <span class="fa fa-star fa-2x unchecked" value="4"></span>
+    <span class="fa fa-star fa-2x unchecked" value="5"></span>
+    <div style="display:block;"></div>
+
+
+
+    <div style="display:block;"></div>
+
+
+    <p>write a review button</p>
+    <button onclick="openRate()">IM A  BUTON RAHH</button>
+
+    <div class="rateMenu" id="rateMenu">
+        <form method="POST">
+            <h1 class="rateTitle">Rate This User</h1>
+            <hr class="titleDivider">
+            <div class="starRatings">
+                <h2 class="starTitle">Star Rating</h2>
+                <div class="rating">
+                    <i class="star star-button fa fa-star fa-2x "></i>
+                    <i class="star star-button fa fa-star fa-2x "></i>
+                    <i class="star star-button fa fa-star fa-2x "></i>
+                    <i class="star star-button fa fa-star fa-2x "></i>
+                    <i class="star star-button fa fa-star fa-2x "></i>
+                </div>
+            </div>
+
+            <h2 class="commentTitle">Comments</h2>
+
+            <div>
+                <textarea <input type="text" rows="20" cols="30" name="comment" class="form-control commentBox" id="form.comment" placeholder="Write comments here! (300 word max.)" /></textarea>
+            </div>
+
+            <div class="buttons">
+                <button class="closeButton buttonBox" onclick="closeRate()" type="button">Cancel</button>
+                <button class="submitButton buttonBox" type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="overlay" onclick="closeRate()" id="overlay"></div>
+
+    <script src="static/jsfiles/rating.js"></script>
+
+</body>
+</html>
