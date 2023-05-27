@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect, flash, Flask, url_for
+from flask import render_template, request, session, redirect, flash, Flask, url_for, jsonify
 from workspace import app
 from workspace.forms import RegisterForm, LoginForm, PostForm
 from workspace.validators import registerHandling
@@ -161,33 +161,46 @@ def profile():
     db = Sqlconnector.db
     mycursor = db.cursor()
     db.reconnect()
+
     #Find the username in database
-    # try:
-    name = session["username"]
-    mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [name])
-    accountInfo = mycursor.fetchall()[0]
-    print(accountInfo)
-    # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
-    #Load data into variables to put into HTML
-    userID = accountInfo[0]
-    email = accountInfo[1]
-    name = accountInfo[3] + " " + accountInfo[4]
-    print(name)
-    username = accountInfo[5]
-    age = accountInfo [6]
-    postal = accountInfo[7]
-    profilePic = accountInfo[8]
-    gallery1 = accountInfo[9]
-    gallery2 = accountInfo[10]
-    gallery3 = accountInfo[11]
-    gallery4 = accountInfo[12]
+    try:
+        name = session["username"]
+        mycursor.execute('SELECT * FROM LoginInfo WHERE username = %s', [name])
+        accountInfo = mycursor.fetchall()[0]
+        print(accountInfo)
+        # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
+        #Load data into variables to put into HTML
+        userID = accountInfo[0]
+        email = accountInfo[1]
+        name = accountInfo[3] + " " + accountInfo[4]
+        print(name)
+        username = accountInfo[5]
+        age = accountInfo [6]
+        postal = accountInfo[7]
+        profilePic = accountInfo[8]
+        gallery1 = accountInfo[9]
+        gallery2 = accountInfo[10]
+        gallery3 = accountInfo[11]
+        gallery4 = accountInfo[12]
+
+        averageRating = calcRating(userID, username)
+
+        #grabs all rows from the ratinginfo table where the userID is the person that is being rated.
+        mycursor.execute("SELECT * FROM ratinginfo WHERE userID = %s", [userID])
+        descriptionInfo = mycursor.fetchall()
+      
+    except:
+        return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+
+
+
     print(username, userID)
-    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name)
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
 # except:
     #     return login_page()
 
 
-#Dyamic Profiles 
+#Dynamic Profiles 
 #To access profiles: http://127.0.0.1:5000/profile/[username]
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def other_profile(username):
@@ -195,8 +208,9 @@ def other_profile(username):
     mycursor = db.cursor()
     db.reconnect()
     #Find the username in database
+    averageRating = 0
+    mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [username])
     try:
-        mycursor.execute('SELECT * FROM LoginInfo WHERE username  = %s', [username])
         accountInfo = mycursor.fetchall()[0]
         # (INDEX GUIDE) 0: userID, 1: email 2: pass 3: firstName 4: lastName 5: username 6: age 7: postalCode
         #Load data into variables to put into HTML
@@ -206,15 +220,93 @@ def other_profile(username):
         username = accountInfo[5]
         age = accountInfo [6]
         postal = accountInfo[7]
-        profilePic = accountInfo[8]
+        profilePic =  accountInfo[8]
         gallery1 = accountInfo[9]
         gallery2 = accountInfo[10]
         gallery3 = accountInfo[11]
         gallery4 = accountInfo[12]
-        return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name)
+
+        #grabs all rows from the ratinginfo table where the userID is the person that is being rated.
+        mycursor.execute("SELECT * FROM ratinginfo WHERE userID = %s", [userID])
+        descriptionInfo = mycursor.fetchall()
+
+        averageRating = calcRating(userID, username)
+        print(f"Average Rating: {averageRating}")
+
+        if request.method == 'POST':
+            try:
+                profileRatings(userID, username)
+                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+
+            except:
+                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
     except:
-        return 'User not found', 404 
+       return 'User not found', 404
+   
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+
+
+
+#Handles ratings => database
+def profileRatings(userID, username):
+    db = Sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
     
+    #ADD: error handling (comment & rateValue needs to be required)
+    #ADD: average rating value and add to user info
+    description = request.form['comment']
+    
+
+    raterUser = session['username']
+    rating = session['rateValue']
+        
+    if rating == None or description == '':
+        print("Not all requirements fufilled")
+        return redirect("/profile/<username>")
+
+    print(f"UserID: {userID}, rateUser: {raterUser}, rating: {rating}, description: {description} ")
+
+    #'INSERT INTO PostInfo(userID, title, username, schedule, timePosted, postalCode, description, status) VALUES (%s, %s, %s, %s, %s, %s, %s, 0)', [userID, title, username, schedule, timePosted, postalCode, description]
+    mycursor.execute('INSERT INTO ratinginfo(userID, raterUser, rating, description) VALUES (%s,%s,%s,%s)',[userID, raterUser, rating, description])
+    db.commit()
+    print("Successful!")
+
+
+                
+    #Once value is stored, return to default
+    session.pop('rateValue', None)
+            
+    print(username,description,rating)
+    
+    return redirect("/profile/<username>")
+    
+
+@app.route('/receive_rating', methods=['POST'])
+def receive_rating():
+    rateValue = request.json['rating']
+    session['rateValue'] = rateValue
+
+    return jsonify({'message': 'Rating received'})
+
+
+def calcRating(userID, username):
+    db = Sqlconnector.db
+    mycursor = db.cursor()
+    db.reconnect()
+    #takes all the ratings that were specific to that user.
+    mycursor.execute('SELECT rating FROM ratinginfo WHERE userID = %s', [userID])
+
+    rateList = mycursor.fetchall()
+    #mycursor.fetchall() stores values as a tuple, so extracting it using list comprehension is necessary
+    rateList = [i[0] for i in rateList]
+    if len(rateList) != 0:
+        #this would sum all the values of the list and divide it by the length of the list to calculate the average (rounded up if >=.5)
+        averageRating = sum(rateList) // len(rateList)
+        return averageRating
+    else:
+        averageRating = 0
+        return averageRating
 
 #Test Redirects
 @app.route("/registertest")
@@ -232,23 +324,6 @@ def alantest():
 @app.route("/nav")
 def mynavbar():
     return render_template("francisnavbar.html")
-
-@app.route("/btest", methods=['GET', 'POST'])
-def filter():
-    if request.method == 'POST':
-        filter_option = request.form.get('filter')
-        # Process the filter_option and retrieve filtered results
-        
-        # For example, you can simulate filtering a list of items
-        # based on the selected option
-        all_results = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-        filtered_results = "hi"
-        #[result for result in all_results if result.endswith(filter_option)]
-        
-        return render_template('briantestfilter.html', filtered_results=filtered_results)
-    else:
-        return render_template('briantestfilter.html', filtered_results=[])
-
 
 #photos testing
 @app.route("/phototest", methods=['GET','POST'])
@@ -271,7 +346,7 @@ def phototest():
                 upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
             if request.form['Upload'] == 'gallery4':
                 upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-        return render_template("phototest.html")
+        return redirect("/profile")
     except:
         return login_page()
     
@@ -279,3 +354,5 @@ def phototest():
 @app.route("/usertest", methods=['GET','POST'])
 def usertest():
     return render_template("user_profile_test.html")
+
+

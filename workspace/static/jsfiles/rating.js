@@ -1,12 +1,21 @@
+function openPicture() {
+    const menu = document.getElementById('editPicture');
+    menu.style.display = 'block';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+}
 
+function closePicture() {
+    const overlay = document.getElementById('editPicture');
+    overlay.style.display = 'none';
+
+}
 
 function openRate() {
     const menu = document.getElementById('rateMenu');
     menu.style.display = 'block';
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'block';
-
-
 }
 
 function closeRate() {

@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
-
-{% block title %}
-Current Listings
-{% endblock %}
-
-{% block content %}
+<link rel="stylesheet" href="../static/csspages/navbar.css">
 <link rel="stylesheet" href="../static/csspages/listings.css">
+
+{% include 'francisnavbar.html' %}
+{% block content %}
+
 <body class = containerbody>
+<script>var profilePic = '{{session["profilePic"]}}';</script>
 <div class = "maincontainer">
 
     <div class = "leftsidebar">

@@ -1,17 +1,13 @@
-*{
-    font-family: 'Patua One', cursive;
-    animation: fadeIn ease 1s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+@font-face {
+    font-family: 'euclid';
+    src: url('./fonts/EuclidFlex.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    padding: 0;
 }
 
-@keyframes fadeIn{
-    0% {
-        opacity: .3;
-    }
-    100%{
-        opacity: 1;
-    }
+*{
+  font-family: 'euclid', sans-serif;
 }
 
 .bold{
@@ -35,6 +31,7 @@
     padding: 0;
     box-sizing: border-box;
     background-color: rgb(255, 255, 255, 0.849);
+    z-index: 2;
 }
 
 .leftsidebar{

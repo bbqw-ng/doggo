@@ -21,7 +21,7 @@ code {
 }
 /*Theme Customization*/
 :root {
-    --bg: #FFF0F5;
+    --bg: #B8C9A9;
     --bg-accent: #484a4d;
     --text-color: #000000;
     --nav-size: 80px;
@@ -48,6 +48,7 @@ a {
     background-color: var(--bg);
     padding: 0 1rem;
     border-bottom: 0px solid #000000;
+    z-index: 9999;
 }
 
 /*Container for unordered list that sits inside navbar*/
@@ -120,6 +121,7 @@ a {
     padding: 0.3rem;
     overflow: hidden;
     display: none;
+    z-index: 9999;
 
     animation-name: drop;
     animation-duration: 0.3s;

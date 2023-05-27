@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="../static/csspages/profiletest.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+<link rel="stylesheet" href="../static/csspages/ratings.css">
 {% include 'francisnavbar.html' %}
 {% block content %}
 <body>
@@ -6,7 +8,41 @@
     <div id="main_content" class="content">
         <div id="row1" class="row">
             <div id="profile_intro">
+
+                {% if session['username'] == username %}
+                <img onclick="openPicture()" , id="profile_pic2" src="{{profilePic}}">
+                {% else %}
                 <img id="profile_pic" src="{{profilePic}}">
+                {% endif %}
+                <div class="editPicture" id="editPicture">
+                    Profile pic
+                    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+                        <input type="file" name="image">
+                        <input type="submit" name="Upload" value="profilePic">
+                    </form>
+                    gallery 1
+                    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+                        <input type="file" name="image">
+                        <input type="submit" name="Upload" value="gallery1">
+                    </form>
+                    gallery 2
+                    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+                        <input type="file" name="image">
+                        <input type="submit" name="Upload" value="gallery2">
+                    </form>
+                    gallery 3
+                    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+                        <input type="file" name="image">
+                        <input type="submit" name="Upload" value="gallery3">
+                    </form>
+                    gallery 4
+                    <form method="POST" action="{{ url_for('phototest') }}" enctype="multipart/form-data">
+                        <input type="file" name="image">
+                        <input type="submit" name="Upload" value="gallery4">
+                    </form>
+                </div>
+
+
                 <div id="name">{{name}}</div>
                 <div id="username">{{username}}</div>
             </div>
@@ -36,17 +72,89 @@
             </div>
         </div>
         <div id="row3" class="row">
+
             <div id="ratings_header">
-                <h2 class="title">My Ratings</h2>
+                <h2 class="ratingTitle">My Ratings</h2>
                 <div id="star_ratings"></div>
             </div>
+
+
             <div id="reviews">
-                <p>I LOVE THIS DOG</p>
-                <p>I LOVE THIS BAT</p>
-                <p>I LOVE THIS RAT</p>
-                <p>I LOVE THIS CAT</p>
+                {% for i in range (0,5) %}
+
+                {% if i < averageRating %}
+                <span class="fa fa-star fa-2x goldenStaticStar"></span>
+                {% else %}
+                <span class="fa fa-star fa-2x staticStar"></span>
+                {% endif %}
+                {% endfor %}
             </div>
-            <button class="button" id="submit_review">Write a Review</button>
+
+            {% if session['username'] != username %}
+            <button id="reviewButton" onclick="openRate()">Write a Review?</button>
+            {% endif %}
+
+            <div class="commentBlock">
+                {% for info in descriptionInfo %}
+                    <div class="block">
+
+                        <div class="header">
+                            <div class="headerUsername">
+                                {{info[1]}}
+                            </div>
+                            <div class="headerStars">
+                            {% for rating in range (0,5) %}
+                                {% if info[2] > rating %}
+                                    <span class="fa fa-star fa-2x goldenStaticStarComment"></span>
+                                {%else%}
+                                    <span class="fa fa-star fa-2x staticStarComment"></span>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="descriptionbox">
+                        {{info[3]}}
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+             </div>
+
+            <div class="rateMenu" id="rateMenu">
+
+                <form method="POST">
+                    <h1 class="rateTitle">Rate This User</h1>
+                    <hr class="titleDivider">
+                    <div class="starRatings">
+                        <h2 class="starTitle">Star Rating</h2>
+                        <div class="rating">
+                            <i class="star star-button fa fa-star fa-2x "></i>
+                            <i class="star star-button fa fa-star fa-2x "></i>
+                            <i class="star star-button fa fa-star fa-2x "></i>
+                            <i class="star star-button fa fa-star fa-2x "></i>
+                            <i class="star star-button fa fa-star fa-2x "></i>
+                        </div>
+                    </div>
+
+                    <h2 class="commentTitle">Comments</h2>
+
+                    <div>
+                        <textarea <input type="text" rows="20" cols="30" name="comment" class="form-control commentBox" id="form.comment" placeholder="Write comments here! (300 word max.)" /></textarea>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="closeButton buttonBox" onclick="closeRate()" type="button">Cancel</button>
+                        <button class="submitButton buttonBox" type="submit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="overlay" onclick="closeRate(), closePicture()" id="overlay"></div>
+
+            <script src="../static/jsfiles/rating.js"></script>
         </div>
     </div>
     {% endblock %}
