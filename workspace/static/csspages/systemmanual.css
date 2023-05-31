@@ -9,6 +9,10 @@
   font-family: "semibold", sans-serif;
 }
 
+body{
+    background-color: #dfdfdf;
+}
+
 .maincontainer{
     display:flex;
     justify-content: center;
@@ -24,6 +28,7 @@
     border: 1px solid black;
     margin: 8rem 0 0 0;
     border-radius: 5px;
+    background-color: white;
 }
 
 .headertext{
@@ -45,11 +50,12 @@
     margin: 0;
 }
 
-.contentTitle{
-    margin: 1rem 0 1rem 0;
+.titles{
+    margin: .5rem 0 .5rem 0;
     font-size: x-large;
 }
 
 li{
-    margin: .3rem;
+    margin-bottom: 1rem;
+    width: 500px;
 }

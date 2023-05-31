@@ -4,13 +4,13 @@
 {% include 'francisnavbar.html' %}
 {% block content %}
 
-<body class = containerbody>
 <script>var profilePic = '{{session["profilePic"]}}';</script>
+<div class="allpage">
 <div class = "maincontainer">
 
     <div class = "leftsidebar">
         <div class="profileicon">
-            <img src="{{profilePic}}">
+            <img class="profileimg" src="{{profilePic}}">
         </div>
         <h2 class = "profileUsername">
             {{username}}
@@ -99,7 +99,5 @@
     </div>
 
 </div>
-</body>
-<script src="../static/jsfiles/test.js"></script>
-
+</div>
 {% endblock %}
