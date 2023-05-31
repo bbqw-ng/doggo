@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="../static/csspages/systemmanual.css">
     <title>System Manual</title>
+    {% include 'francisnavbar.html' %}
 </head>
+{% block content %}
 <body>
-    <div style ="display: flex; 
-                justify-content: center; 
-                align-items: center;"
-                >
-        <div style="display:flex; flex-direction: column; width: 50rem; height: 30rem; display:flex; align-items: center; border: 1px solid black; margin: 8rem 0 0 0; border-radius: 5px; ">
-            <div style="font-size: xx-large; margin: .5rem 0 .5rem 0;">
+    <div class = "maincontainer">
+        <div class="innercontainer">
+            <div class = "headertext">
                 System Requirements
             </div>
-            <hr style="width: 100%; color: black; background-color: black; margin: 0;">
-            <div style="margin-top: 1rem;">
-            To properly use our app, you must have:
+            <hr class="breakerline">
+            <div class="contentTitle">
+            To access our app, you must:
             </div>
+            <ul>
+                <li>Have a working device such as a phone or a computer (computer highly recommended)</li>
+                <li>Have access to internet connection</li>
+                <li>Be using a viable browser such as Chrome, Safari, Firefox, Opera</li>
+                <li></li>
+            </ul>
+
         </div>
     </div>
 </body>
+<script src="../static/jsfiles/rating.js"></script>
+{% endblock %}
 </html>

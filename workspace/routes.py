@@ -355,4 +355,8 @@ def phototest():
 def usertest():
     return render_template("user_profile_test.html")
 
+@app.route("/systemmanual")
+def systemManual():
+    return render_template("systemmanual.html")
+
 
