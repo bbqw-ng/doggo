@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="../static/csspages/userguide.css">
+    <title>User Guide</title>
+    {% include 'francisnavbar.html' %}
+</head>
+{% block content %}
+<body class = "columncontainer">
+    <div class = "left"></div>
+    <div class = "center">
+        <h2>Welcome to DogGo's User-Friendly User Guide</h2>
+        <div>To start please navigate to our homepage</div>
+        <div>It should look a little something like this</div>
+        <img src="../static/pictures/pictures_for_user_guide/homepageimage.png" alt="doggo webpage">
+        <div>Now go ahead and click the "Get Started!" under the "A Playground For Your Dog"</div>
+        <div>It should bring you to a registration page that looks like this</div>
+        <img src="../static/pictures/pictures_for_user_guide/registrationpage.png" alt="registration page">
+        <div>Now go ahead and fill in the boxes which ask for different things such as your username, password, etc</div>
+        <div>Please understand that there are some requirements such as having an age of atleast 16 and a valid email</div>
+        <div>The website should tell you if an error relating to your registration has occurred</div>
+        <div>An example of this might look like: </div>
+        <img src="../static/pictures/pictures_for_user_guide/errormessage1.png" alt="password error message">
+        <div>In this example above, your password was less than 8 characters in length</div>
+        <div>Don't worry this can be easily fixed, just type in a new password that is atleast 8 characters in length.</div>
+        <div>After you have successfully registered it should automatically bring you to a page where you can view your profile</div>
+        <img src="../static/pictures/pictures_for_user_guide/profilepage.png" alt="password error message">
+        <div>Here you have access to many thing such as your about me, your ratings, your gallery, your information, and your preset profile picture</div>
+        <div>Lets begin by changing our profile picture and adding pictures to our gallery</div>
+        <div>Click your preset profile picture to pull up a menu that allows you to change your profile picture</div>
+        <div>It should look like this</div>
+        <img src="../static/pictures/pictures_for_user_guide/imageupload.png" alt="password error message">
+        <div>Now you just click on the "Choose File" button under the "Profile pic" and the "gallery 1,2,3,4"</div>
+        <div>After selecting all of the pictures that you want on your profile, click any button on the right side such as the "profilePic" button</div>
+        <div>This will then upload your picturesand if you reload your page, you will most likely see the updated pictures</div>
+        <div>Now lets go on and move to the "Listings Page"</div>
+        <div>Look on the top right of your screen and you will see your profile picture in the shape of a ball</div>
+        <div>After you click that, go on and click the "your listings"</div>
+        <div>It should take you to our listings page which looks like this</div>
+        <img src="../static/pictures/pictures_for_user_guide/listingspage.png" alt="password error message">
+        <div>Here you can see the listings that other users have placed and you also have permission to post your own post</div>
+        <div>To create your own post go ahead and click the "Create a Post" button.</div>
+        <div>
+        <img class = special src="../static/pictures/pictures_for_user_guide/createapost.png" alt="password error message">
+        </div>
+        <div>You should show up to a page that looks like this</div>
+        <img src="../static/pictures/pictures_for_user_guide/postcreation.png" alt="password error message">
+        <div>Now all you need to do is fill in the blanks and fulfill the requirements that come with it just like you did on the register page</div>
+        <div>After that you should be brought back to the listings page and voila, your post is on the tippity top of the page</div>
+        <div>And as always, to secure your account, please click the icon on the top right again and press "Sign out" after you are done using our services</div>
+        <img src="../static/pictures/pictures_for_user_guide/signout.png" alt="password error message">
+        <div>Thats all for the User-Friendly User Guide</div>
+        <div>If there are any other questions that aren't covered by the User-Friendly User Guide,</div>
+        <div>Please inquire at bw672@drexel.edu, fn87@drexel.edu, aw3477@drexel.edu, jj3247@drexel.edu</div>
+    </div>
+    <div class = "right"></div>
+</body>
+<script src="../static/jsfiles/rating.js"></script>
+{% endblock %}
+</html>

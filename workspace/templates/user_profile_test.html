@@ -1,7 +1,10 @@
 <link rel="stylesheet" type="text/css" href="../static/csspages/profiletest.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 <link rel="stylesheet" href="../static/csspages/ratings.css">
-{% include 'francisnavbar.html' %}
+<head>
+    <title>{{username}}'s Profile</title>
+    {% include 'francisnavbar.html' %}
+</head>
 {% block content %}
 <body>
     <script>var profilePic = '{{session["profilePic"]}}';</script>

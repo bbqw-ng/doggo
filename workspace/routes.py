@@ -19,7 +19,7 @@ from workspace.upload import upload_image
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('alantesting.html')
+    return render_template('homepage.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
@@ -358,5 +358,9 @@ def usertest():
 @app.route("/systemmanual")
 def systemManual():
     return render_template("systemmanual.html")
+
+@app.route("/userguide")
+def userGuide():
+    return render_template("userguide.html")
 
 

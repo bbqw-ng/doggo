@@ -29,24 +29,17 @@
 }
 
 .content h1{
-    font-size: 50px;
+    font-size: 100px;
     color: white;
     font-weight: 600;
-    margin-bottom: 0px;;
-    transition: 0.5s;
-}
-
-.content h1:hover{
-    -webkit-text-stroke: 2px white;
-    color: transparent;   
+    margin-bottom: 0px;
 }
 
 .content h2{
-    font-size: 75px;
+    font-size: 60px;
     color: white;
     font-weight: 500;
-    margin-bottom: 0px;
-    transition: 0.5s;
+    margin-bottom: 20px;
     word-wrap: break-word;
     max-width: 70%;
 }
@@ -67,12 +60,11 @@
     display: inline-block;
     color: white;
     font-size: 25px;
-    font-weight: 30;
+    font-weight: 10px;
     border: 2px solid white;
     padding: 14px 70px;
     border-radius: 30px;
     margin-top: 0px;
-    transition: 0.5s;
     width: 300px;
     height: 75px;
     background-color: transparent;
@@ -80,5 +72,7 @@
 }
 
 .content button:hover{
-    background-color: lightgrey;
+    background-color: rgba(227, 227, 227, 0.609);
+    color: black;
+    transition: .8s;
 }
