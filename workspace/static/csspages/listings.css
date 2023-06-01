@@ -48,7 +48,7 @@
 
 .profileZipcode{
     font-size: .8rem;
-    margin: -1rem 0 0 8.5rem;
+    margin: -1rem 0 0 6rem;
 }
 
 .profileicon{
@@ -125,7 +125,7 @@
     align-items: center;
     border: 1px solid black;
     border-radius: .4rem;
-    margin: 1rem 0 0 8rem;
+    margin: 1rem 0 0 5.5rem;
     width: 8rem;
     background-color: rgb(46, 212, 96)
 }
