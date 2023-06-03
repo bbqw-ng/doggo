@@ -2,6 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\api_photos_testing",
+    "\\Biographies",
     "\\workspace",
     "\\workspace\\static",
     "\\workspace\\static\\csspages",
@@ -9,6 +10,6 @@
     "\\workspace\\static\\pictures",
     "\\workspace\\templates"
   ],
-  "SelectedNode": "\\workspace\\templates\\register.html",
+  "SelectedNode": "\\workspace\\routes.py",
   "PreviewInSolutionExplorer": false
 }
