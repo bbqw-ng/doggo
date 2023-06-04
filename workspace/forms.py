@@ -27,3 +27,6 @@ class PostForm(FlaskForm):
 
 class RateForm(FlaskForm):
     comment = StringField(label='Comment')
+
+class ProfileDescription(FlaskForm):
+    profileDescription = StringField(label='ProfileDescription')

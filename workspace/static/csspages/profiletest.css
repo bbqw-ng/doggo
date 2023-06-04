@@ -176,6 +176,24 @@
     animation: expand 0.2s ease;
 }
 
+.descriptionMenu {
+    background-color: mintcream;
+    display: none;
+    /*sizing*/
+    width: 600px;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 3;
+    animation: expand 0.2s ease;
+}
+
 @keyframes expand {
     0% {
         transform: translate(-50%, -50%) scale(0, 0);
@@ -247,6 +265,12 @@
   margin: 0.5rem 0 0 3rem;
   width: 31rem;
   height: 9rem;
+}
+
+.descriptionTextBox {
+    margin: 2rem 0 0 3rem;
+    width: 32rem;
+    height: 15rem;
 }
 
 textarea{

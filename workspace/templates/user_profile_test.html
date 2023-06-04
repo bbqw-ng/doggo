@@ -60,7 +60,26 @@
             <div id="about_me" class="col">
                 <div id="about_me_header">
                     <h2 class="title">About Me</h2>
-                    <button class="button">EDIT</button>
+
+                    {% if session['username'] == username %}
+                    <button onclick="openDescription()" class="button">EDIT</button>
+                    {% endif %}
+                    <div class="descriptionMenu" id="descriptionMenu">
+                        <form method="POST">
+                            <h1 class="rateTitle">Description</h1>
+                            <hr class="titleDivider">
+
+                            <div>
+                                <textarea <input type="text" rows="20" cols="30" name="profileDescription" class="form-control descriptionTextBox" id="form.profileDescription" placeholder="Write a description here! (500 words max.)" /></textarea>
+                            </div>
+
+                            <div class="buttons">
+                                <button class="closeButton buttonBox" onclick="closeDescription()" type="button">Cancel</button>
+                                <button class="submitButton buttonBox" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
                 <div id="description">DESCRIPTION</div>
             </div>
@@ -155,7 +174,7 @@
 
             </div>
 
-            <div class="overlay" onclick="closeRate(), closePicture()" id="overlay"></div>
+            <div class="overlay" onclick="closeRate(), closePicture(), closeDescription()" id="overlay"></div>
 
             <script src="../static/jsfiles/rating.js"></script>
         </div>

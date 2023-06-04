@@ -26,6 +26,20 @@ function closeRate() {
 }
 
 
+function openDescription() {
+    const descriptionMenu = document.getElementById('descriptionMenu');
+    descriptionMenu.style.display = 'block';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+}
+
+function closeDescription() {
+    const descriptionMenu = document.getElementById('descriptionMenu');
+    descriptionMenu.style.display = 'none';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
+}
+
 const stars = document.querySelectorAll('.star');
 let rating = 0;
 
