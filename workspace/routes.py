@@ -182,20 +182,29 @@ def profile():
         gallery2 = accountInfo[10]
         gallery3 = accountInfo[11]
         gallery4 = accountInfo[12]
+        aboutMe = accountInfo[13]
 
+
+            
         averageRating = calcRating(userID, username)
+        print(f"HELLO %s"%averageRating)
 
         #grabs all rows from the ratinginfo table where the userID is the person that is being rated.
         mycursor.execute("SELECT * FROM ratinginfo WHERE userID = %s", [userID])
         descriptionInfo = mycursor.fetchall()
-      
+        
+        
+        if request.method == 'POST':
+            aboutMe = request.form['profileDescription']
+            mycursor.execute("UPDATE LoginInfo SET aboutMe WHERE userID = %s",[userID])
+            db.commit()
     except:
-        return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+        return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo, aboutMe = aboutMe)
 
 
 
     print(username, userID)
-    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo, aboutMe= aboutMe)
 # except:
     #     return login_page()
 
@@ -225,25 +234,37 @@ def other_profile(username):
         gallery2 = accountInfo[10]
         gallery3 = accountInfo[11]
         gallery4 = accountInfo[12]
+        aboutMe = accountInfo[13]
 
+
+
+
+        mycursor.fetchall()
         #grabs all rows from the ratinginfo table where the userID is the person that is being rated.
         mycursor.execute("SELECT * FROM ratinginfo WHERE userID = %s", [userID])
         descriptionInfo = mycursor.fetchall()
 
         averageRating = calcRating(userID, username)
         print(f"Average Rating: {averageRating}")
+        
+        if request.method == 'POST' and 'profileDescription' in request.form:
+            aboutMe = request.form['profileDescription']
+            mycursor.execute("UPDATE LoginInfo SET aboutMe = %s WHERE userID = %s",[aboutMe,userID])
+            print("yes")
+            db.commit()
+            mycursor = db.cursor()
 
-        if request.method == 'POST':
+        elif request.method == 'POST' and 'comment' in request.form:
             try:
                 profileRatings(userID, username)
-                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo, aboutMe = aboutMe)
 
             except:
-                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+                return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo, aboutMe = aboutMe)
     except:
        return 'User not found', 404
    
-    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo)
+    return render_template('user_profile_test.html', username = username, userID = "{:03d}".format(userID), profilePic = profilePic, gallery1 = gallery1, gallery2 = gallery2, gallery3 = gallery3, gallery4 = gallery4, email = email, age = age, postal = postal, name = name, averageRating = averageRating, descriptionInfo = descriptionInfo, aboutMe = aboutMe)
 
 
 
