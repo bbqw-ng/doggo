@@ -354,22 +354,21 @@ def phototest():
     db.reconnect()
     
     name = session["username"]
-    try:
-        if request.method == 'POST':
-            file = request.files['image']
-            if request.form['Upload'] == 'profilePic':
-                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-            if request.form['Upload'] == 'gallery1':
-                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-            if request.form['Upload'] == 'gallery2':
-                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-            if request.form['Upload'] == 'gallery3':
-                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-            if request.form['Upload'] == 'gallery4':
-                upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
-        return redirect("/profile")
-    except:
-        return login_page()
+
+    if request.method == 'POST':
+        file = request.files['image']
+        if request.form['Upload'] == 'profilePic':
+            upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+        if request.form['Upload'] == 'gallery1':
+            upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+        if request.form['Upload'] == 'gallery2':
+            upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+        if request.form['Upload'] == 'gallery3':
+            upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+        if request.form['Upload'] == 'gallery4':
+            upload_image(file, name, request.form['Upload'] , storage, mycursor, db)
+    return redirect("/profile")
+
     
 #user profile test
 @app.route("/usertest", methods=['GET','POST'])
