@@ -2,10 +2,10 @@ import mysql.connector
 
 class Sqlconnector:
     db = mysql.connector.connect(
-    host = 'doggoserver.mysql.database.azure.com',
-    port = '3306',
-    user = 'mainadmin',
-    password = '9jznqua4y5T@',
-    database = 'userinfo'
+    host = #removed (app will not run)
+    port = #removed
+    user = #removed
+    password = #removed
+    database = #removed
     )
 
